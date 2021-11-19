@@ -18,12 +18,27 @@
     <ClCompile Include="Data Structures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StaticList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Education\College\SWE-210 (Data Structures &amp; Algorithms)\Labs\Belal - Data Lab 3-20211021T055650Z-001\Belal - Data Lab 3\Belal - Data Lab 3\StaticList.h">
+    <ClInclude Include="DStack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Education\College\SWE-210 (Data Structures &amp; Algorithms)\Labs\Data Lab 4\Data Lab 4\DynamicList.h">
+    <ClInclude Include="DynamicList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LLStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

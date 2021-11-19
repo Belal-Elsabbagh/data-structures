@@ -140,10 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Data Structures.cpp" />
+    <ClCompile Include="StaticList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Education\College\SWE-210 (Data Structures &amp; Algorithms)\Labs\Belal - Data Lab 3-20211021T055650Z-001\Belal - Data Lab 3\Belal - Data Lab 3\StaticList.h" />
-    <ClInclude Include="D:\Education\College\SWE-210 (Data Structures &amp; Algorithms)\Labs\Data Lab 4\Data Lab 4\DynamicList.h" />
+    <ClInclude Include="DStack.h" />
+    <ClInclude Include="DynamicList.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="LLStack.h" />
+    <ClInclude Include="StaticList.h" />
+    <ClInclude Include="TQueue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
