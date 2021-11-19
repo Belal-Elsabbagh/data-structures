@@ -93,6 +93,8 @@ public:
      -----------------------------------------------------------------------*/
 
     void erase(int pos);
+    void reverse();
+    const DynamicList operator+(DynamicList rightHandSide);
     /*----------------------------------------------------------------------
      Remove a value from the list at a given position.
 

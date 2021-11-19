@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Data Structures.cpp" />
+    <ClCompile Include="DynamicList.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="StaticList.cpp" />
   </ItemGroup>
   <ItemGroup>
