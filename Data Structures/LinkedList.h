@@ -124,8 +124,12 @@ public:
      Postcondition: Index of node containing dataVal is returned
      if such a node is found, -1r if not.
      --------------------------------------------------------------------*/
-
-
+    void insertUsingInputOperator(istream& in);
+    /*--------------------------------------------------------------------
+     implementation of operator>> 
+     Precondition:  istream out is open
+     Postcondition: Elements entered have been inserted to the LinkedList
+     --------------------------------------------------------------------*/
 }; //--- end of List class
 
 ostream& operator<<(ostream& out, const LinkedList& aList);

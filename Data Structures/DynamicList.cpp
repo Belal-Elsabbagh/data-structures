@@ -1,6 +1,7 @@
 #include "DynamicList.h"
 #include <cassert>
 #include <new>
+
 DynamicList::DynamicList(int maxSize) : mySize(0), myCapacity(maxSize)
 {
 	myArray = new(nothrow) ElementType[myCapacity];
@@ -43,7 +44,6 @@ const DynamicList& DynamicList::operator=(const DynamicList& rightHandSide)
 		for (int i = 0; i < mySize; i++)
 			myArray[i] = rightHandSide.myArray[i];
 	}
-
 	return *this;
 }
 

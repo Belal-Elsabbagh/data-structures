@@ -152,4 +152,71 @@ int LinkedList::nodeCount()
 
 void LinkedList::reverse()
 {
+	NodePointer prevP = 0,
+				currentP = first,
+				nextP;
+	while (currentP != 0)
+	{
+		nextP = currentP->next;
+		currentP->next = prevP;
+		prevP = currentP;
+		currentP = nextP;
+	}
+	first = prevP; // new head of (reversed) LinkedList
+}
+
+bool LinkedList::ascendingOrder()
+{
+	if (mySize <= 1)
+		// empty or one element list
+		return true;
+	NodePointer prevP = first,
+				tempP = first->next;
+	while (tempP != 0 && prevP->data <= tempP->data)
+	{
+		prevP = tempP;
+		tempP = tempP->next;
+	}
+	if (tempP != 0)
+		return false;
+	return true;
+}
+
+int LinkedList::search(ElementType dataVal)
+{
+	int loc;
+	NodePointer tempP = first;
+	for (loc = 0; loc < mySize; loc++)
+	{
+		if (tempP->data == dataVal)
+			return loc;
+		else
+			tempP = tempP->next;
+	}
+	return -1;	
+}
+
+void LinkedList::insertUsingInputOperator(istream& in)
+{
+	int numOfElements;
+	in >> numOfElements;
+	ElementType dataVal;
+
+	for (int i = 0; i < numOfElements; i++)
+	{
+		in >> dataVal;
+		insert(dataVal, i);
+	}
+}
+
+ostream& operator<<(ostream& out, const LinkedList& aList)
+{
+	aList.display(out);
+	return out;
+}
+
+istream& operator>>(istream& in, LinkedList& aList)
+{
+	aList.insertUsingInputOperator(in);
+	return in;
 }
