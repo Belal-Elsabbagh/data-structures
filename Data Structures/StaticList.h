@@ -41,6 +41,26 @@ public:
      Precondition:  None
      Postcondition: An empty List object has been constructed; mySize is 0.
      -----------------------------------------------------------------------*/
+     
+     /***** Copy constructor *****/
+    StaticList(const StaticList& origList);
+    /*----------------------------------------------------------------------
+     Construct a copy of a List object.
+
+     Precondition:  A copy of origList is needed; origList is a const
+     reference parameter.
+     Postcondition: A copy of origList has been constructed.
+     -----------------------------------------------------------------------*/
+     
+     /***** Assignment operator *****/
+    const StaticList& operator=(const StaticList& rightHandSide);
+    /*----------------------------------------------------------------------
+     Assign a copy of a List object to the current object.
+
+     Precondition: none
+     Postcondition: A copy of rightHandSide has been assigned to this
+     object. A const reference to this list is returned.
+     -----------------------------------------------------------------------*/
 
      /***** empty operation *****/
     bool empty() const;
@@ -87,7 +107,6 @@ public:
     void leftRotation(int numOfRotations);
     void removeDuplicates();
     void deleteByValue(ElementType item);
-
 
 }; //--- end of List class
 

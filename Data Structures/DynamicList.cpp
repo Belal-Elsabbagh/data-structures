@@ -2,6 +2,19 @@
 #include <cassert>
 #include <new>
 
+/*----------------------------------------------------------------------
+  IMPORTANT NOTE
+
+  This is a standard implementation of a simple list. The only
+  difference is that it uses a dynamic array which sets the max capacity
+  with a user defined value. 
+  
+  There won't be any difference in functions.
+  
+  The main changes will be in constructor, copy constructor,
+  assignment operator, and destructor.
+  ----------------------------------------------------------------------*/
+
 DynamicList::DynamicList(int maxSize) : mySize(0), myCapacity(maxSize)
 {
 	myArray = new(nothrow) ElementType[myCapacity];
@@ -46,6 +59,10 @@ const DynamicList& DynamicList::operator=(const DynamicList& rightHandSide)
 	}
 	return *this;
 }
+
+/*----------------------------------------------------------------------
+  Check notes in StaticList.cpp for studying.
+  ----------------------------------------------------------------------*/
 
 bool DynamicList::empty() const
 {

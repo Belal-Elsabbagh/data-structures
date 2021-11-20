@@ -5,6 +5,17 @@ StaticList::StaticList()
 	mySize = 0;
 }
 
+StaticList::StaticList(const StaticList& origList) : mySize(origList.mySize)
+{
+	for (int i = 0; i < mySize; i++)
+		myArray[i] = origList.myArray[i];
+}
+
+const StaticList& StaticList::operator=(const StaticList& rightHandSide)
+{
+	// TODO: insert return statement here
+}
+
 bool StaticList::empty() const
 {
 	return mySize == 0;

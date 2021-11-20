@@ -13,9 +13,6 @@ typedef int ElementType;
 
 class LinkedList
 {
-
-
-
 private:
 
     class Node {

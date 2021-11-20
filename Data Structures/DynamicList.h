@@ -27,6 +27,12 @@ using namespace std;
 typedef int ElementType;
 class DynamicList
 {
+private:
+    /******** Data Members ********/
+    int mySize;                // current size of list
+    int myCapacity;            // capacity of array
+    ElementType* myArray;     // pointer to dynamic array
+
 public:
     /******** Function Members ********/
     /***** Class constructor *****/
@@ -113,12 +119,6 @@ public:
      Postcondition: The list represented by this List object has been
      inserted into out.
      -----------------------------------------------------------------------*/
-
-private:
-    /******** Data Members ********/
-    int mySize;                // current size of list
-    int myCapacity;            // capacity of array
-    ElementType* myArray;     // pointer to dynamic array
 
 }; //--- end of List class
 
