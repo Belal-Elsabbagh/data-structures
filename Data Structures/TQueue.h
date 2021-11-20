@@ -15,10 +15,11 @@
 using namespace std;
 
 //(1) - After defining this class as a template there will be no use for the following line
-typedef int QueueElement;
+//typedef int QueueElement;
 
 //(2) - Define here the class TQueue as a template class that takes the type of its elements
 //from the main function in a type def named QueueElement
+template<class QueueElement>
 class TQueue
 {
 public:
@@ -148,9 +149,84 @@ private:
 //The following is an example of function definition using templates, you should follow the same pattern 
 //while implementing the rest of the functions.
 
-//template <class QueueElement>
-//TQueue<QueueElement>::TQueue() {
-//
-//}
+template <class QueueElement>
+TQueue<QueueElement>::TQueue() 
+{
+	myFront = myBack = 0;
+}
 
+template<class QueueElement>
+inline TQueue<QueueElement>::TQueue(const TQueue& original)
+{
+	NodePointer origPtr, lastPtr;
+	myFront = new Node(original.myFront->data); // copy first node
 
+	// set pointers to point to the first nodes in both lists respectively
+	lastPtr = myFront;
+	origPtr = original.myFront->next; // makes origPtr leading by one node
+
+	while (origPtr != original.myBack) //as long as the original list isn't at the end
+	{
+		// intitializes the next node by the data in origPtr
+		lastPtr->next = new Node(origPtr->data);
+
+		// traverses through list
+		origPtr = origPtr->next;
+		lastPtr = lastPtr->next;
+	}
+	myBack = lastPtr;
+}
+
+template<class QueueElement>
+inline TQueue<QueueElement>::~TQueue()
+{
+	NodePointer prev = myFront,
+				ptr;
+	while (prev != myBack)
+	{
+		ptr = prev->next; // pointer catches the next node in the list
+		delete prev; // delete current node
+		prev = ptr; // set the current node to next
+	}
+	myBack = myFront;
+}
+
+template<class QueueElement>
+inline bool TQueue<QueueElement>::empty() const
+{
+	return myBack == myFront;
+}
+
+template<class QueueElement>
+inline void TQueue<QueueElement>::enqueue(const QueueElement& value)
+{
+	NodePointer temp = new Node(value);
+
+	if (rear == NULL) 
+	{
+		front = rear = temp;
+		return;
+	}
+		myBack->next = temp;
+		myBack = temp;
+}
+
+template<class QueueElement>
+inline void TQueue<QueueElement>::dequeue()
+{
+	// If queue is empty, return NULL.
+	if (front == NULL)
+		return;
+
+	// Store previous front and
+	// move front one node ahead
+	NodePointer temp = myFront;
+	myFront = myFront->next;
+
+	// If front becomes NULL, then
+	// change rear also as NULL
+	if (myFront == NULL)
+		myBack = NULL;
+
+	delete temp;
+}

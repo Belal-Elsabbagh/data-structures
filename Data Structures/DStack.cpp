@@ -34,7 +34,7 @@ const DStack& DStack::operator=(const DStack& rightHandSide)
 		if (myArray == 0)
 		{
 			cout << "\nCouldn't allocate memory. Exiting...\n\a";
-			return;
+			exit(1);
 		}
 		myTop = rightHandSide.myTop;
 		for (int i = 0; i < myCapacity; i++)

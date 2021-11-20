@@ -14,6 +14,7 @@ StaticList::StaticList(const StaticList& origList) : mySize(origList.mySize)
 const StaticList& StaticList::operator=(const StaticList& rightHandSide)
 {
 	// TODO: insert return statement here
+	return *this;
 }
 
 bool StaticList::empty() const

@@ -115,6 +115,7 @@ const DynamicList DynamicList::operator+(DynamicList rightHandSide)
 	for(int i = mySize; i < mySize +rightHandSide.mySize; i++)
 		myArray[i] = rightHandSide.myArray[i];
 	mySize += rightHandSide.mySize;
+	return *this;
 }
 
 void DynamicList::display(ostream& out) const
