@@ -130,6 +130,7 @@ public:
      Precondition:  istream out is open
      Postcondition: Elements entered have been inserted to the LinkedList
      --------------------------------------------------------------------*/
+
 }; //--- end of List class
 
 ostream& operator<<(ostream& out, const LinkedList& aList);
