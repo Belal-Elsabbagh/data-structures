@@ -30,6 +30,9 @@
     <ClCompile Include="LLStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DStack.h">
