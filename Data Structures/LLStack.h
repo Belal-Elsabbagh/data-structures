@@ -1,5 +1,3 @@
-
-
 /*-- LLStack.h --------------------------------------------------------------
 
  This header file defines a Stack data type.
@@ -19,6 +17,29 @@ using namespace std;
 typedef string StackElement;
 class LLStack
 {
+private:
+	/*** Node class ***/
+	class Node
+	{
+	public:
+		StackElement data;
+		Node* next;
+		//--- Node constructor
+		Node(StackElement data, Node* next = 0)
+			/*-------------------------------------------------------------------
+			 Precondition:  None.
+			 Postcondition: A Node has been constructed with value in its data
+			 part and its next part set to link (default 0).
+			 -------------------------------------------------------------------*/
+			: data(data), next(next)
+		{}
+	};
+
+	typedef Node* NodePointer;
+
+	/***** Data Members *****/
+	NodePointer myTop;      // pointer to top of stack
+
 public:
 	/***** Function Members *****/
 	/***** Constructors *****/
@@ -97,37 +118,10 @@ public:
 	 execution allowed to proceed.
 	 -----------------------------------------------------------------------*/
 
-
 	void intersection(const LLStack& s1, LLStack& s);
 
 	StackElement bottom() const;
 
-
-private:
-	/*** Node class ***/
-	class Node
-	{
-	public:
-		StackElement data;
-		Node* next;
-		//--- Node constructor
-		Node(StackElement data, Node* next = 0)
-			/*-------------------------------------------------------------------
-			 Precondition:  None.
-			 Postcondition: A Node has been constructed with value in its data
-			 part and its next part set to link (default 0).
-			 -------------------------------------------------------------------*/
-			: data(data), next(next)
-		{}
-	};
-
-	typedef Node* NodePointer;
-
-	/***** Data Members *****/
-	NodePointer myTop;      // pointer to top of stack
-
 }; // end of class declaration
-
-
 
 ostream& operator<<(ostream& out, LLStack& list);

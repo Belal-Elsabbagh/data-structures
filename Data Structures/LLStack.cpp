@@ -88,3 +88,12 @@ void LLStack::pop()
 	myTop = myTop->next;
 	delete ptr;
 }
+
+void LLStack::intersection(const LLStack& s1, LLStack& s)
+{
+}
+
+StackElement LLStack::bottom() const
+{
+	return StackElement();
+}
