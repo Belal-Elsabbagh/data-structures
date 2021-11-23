@@ -1,6 +1,13 @@
 #include <iostream>
+#include "StaticList.h"
+#include "DynamicList.h"
+#include "LinkedList.h"
+#include "LLStack.h"
+#include "DStack.h"
+#include "TQueue.h"
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    cout << "Hello World!\n";
 }

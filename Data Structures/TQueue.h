@@ -202,9 +202,9 @@ inline void TQueue<QueueElement>::enqueue(const QueueElement& value)
 {
 	NodePointer temp = new Node(value);
 
-	if (rear == NULL) 
+	if (myBack == NULL) 
 	{
-		front = rear = temp;
+		myFront = myBack = temp;
 		return;
 	}
 		myBack->next = temp;

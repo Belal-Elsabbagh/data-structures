@@ -12,7 +12,7 @@
  --------------------------------------------------------------------------*/
 #include <iostream>
 using namespace std;
-typedef int StackElement;
+typedef string StackElement;
 
 class DStack 
 {
