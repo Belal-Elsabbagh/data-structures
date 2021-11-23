@@ -24,19 +24,26 @@ bool StaticList::empty() const
 
 void StaticList::insert(ElementType item, int pos)
 {
-
-	if (pos < 0 || pos > mySize || mySize == CAPACITY)
+	if(mySize == CAPACITY)
 	{
-		cout << "Invalid Insertion. Operation Terminated with no change.\n\a";
+		cerr << "No space to insert.\n\a";
+		exit(1);
 	}
-	else
+	if (pos < 0 || pos > mySize)
 	{
-		for (int i = mySize; i > pos; i--)
+		cerr << "Invalid Insertion. Operation Terminated with no change.\n\a";
+		return;
+	}
+	else // after validating size and index...
+	{
+		// shift elements to the right
+		for (int i = mySize; i > pos; i--) 
 		{
 			myArray[i] = myArray[i - 1];
 		}
-		myArray[pos] = item;
-		mySize++;
+
+		myArray[pos] = item; // insert element
+		mySize++; // increase size by 1
 	}
 }
 
@@ -46,6 +53,7 @@ void StaticList::erase(int pos)
 		cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
 	else
 	{
+		// shift elements to the left & overwrite the element to be erased
 		for (int i = pos; i < mySize; i++)
 		{
 			myArray[i] = myArray[i + 1];
