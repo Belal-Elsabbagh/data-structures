@@ -1,6 +1,15 @@
 #include "LLStack.h"
 using namespace std;
 
+/*------------------------------------------------------------------------
+ Constructors, destructor, and assignment operator
+
+ They all have the same implementation as the one in the LinkedList.
+ This is the standard construction and destruction of a Linked list
+ but with slightly different data member initializations.
+ ------------------------------------------------------------------------*/
+
+
 LLStack::LLStack()
 {
 	myTop = NULL;

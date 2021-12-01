@@ -2,6 +2,14 @@
 #include <cassert>
 #include <new>
 
+/*------------------------------------------------------------------------
+ Constructors, destructor, and assignment operator
+ 
+ They all have the same implementation as the one in the DynamicList.
+ This is the standard construction and destruction of a Dynamic array
+ but with slightly different data member initializations.
+ ------------------------------------------------------------------------*/
+
 DStack::DStack(int numElements) : myCapacity(numElements), myTop(-1)
 {
 	myArray = new(nothrow) StackElement[myCapacity];

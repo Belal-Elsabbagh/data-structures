@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="DStack.h" />
     <ClInclude Include="DynamicList.h" />
+    <ClInclude Include="TPriorityQueue.h" />
     <ClInclude Include="TQueue.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LLStack.h" />

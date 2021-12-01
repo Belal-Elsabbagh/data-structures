@@ -1,22 +1,10 @@
-/*-- TQueue.h -------------------------------------------------------------
-
- This header file defines a Queue data type.
- Basic operations:
- constructor:  Constructs an empty queue
- empty:        Checks if a queue is empty
- enqueue:      Modifies a queue by adding a value at the back
- front:        Accesses the top queue value; leaves queue unchanged
- dequeue:      Modifies queue by removing the value at the front
- display:      Displays all the queue elements
- Note: Execution terminates if memory isn't available for a queue element.
- ---------------------------------------------------------------------------*/
-
+#pragma once
 #include<iostream>
 #include<vector>
 using namespace std;
 
 template<class QueueElement>
-class TQueue
+class TPriorityQueue
 {
 public:
 	/***** Function Members *****/
@@ -24,7 +12,7 @@ public:
 
 
 	/***** Constructors *****/
-	TQueue();
+	TPriorityQueue();
 	/*-----------------------------------------------------------------------
 	 Construct a Queue object.
 
@@ -33,7 +21,7 @@ public:
 	 (myFront and myBack are initialized to null pointers).
 	 -----------------------------------------------------------------------*/
 
-	TQueue(const TQueue& original);
+	TPriorityQueue(const TPriorityQueue& original);
 	/*-----------------------------------------------------------------------
 	 Copy Constructor
 
@@ -43,7 +31,7 @@ public:
 	 -----------------------------------------------------------------------*/
 
 	 /***** Destructor *****/
-	~TQueue();
+	~TPriorityQueue();
 	/*-----------------------------------------------------------------------
 	 Class destructor
 
@@ -52,7 +40,7 @@ public:
 	 -----------------------------------------------------------------------*/
 
 	 /***** Assignment *****/
-	const TQueue& operator= (const TQueue& rightHandSide);
+	const TPriorityQueue& operator= (const TPriorityQueue& rightHandSide);
 	/*-----------------------------------------------------------------------
 	 Assignment Operator
 
@@ -116,53 +104,70 @@ private:
 };
 
 template<class QueueElement>
-TQueue<QueueElement>::TQueue()
+TPriorityQueue<QueueElement>::TPriorityQueue()
 {
-	myArray = new vector(0);
+
 }
 
 template<class QueueElement>
-TQueue<QueueElement>::TQueue(const TQueue& original)
+TPriorityQueue<QueueElement>::TPriorityQueue(const TPriorityQueue& original)
 {
 	myArray = new vector(original.myArray);
 }
 
 template<class QueueElement>
-TQueue<QueueElement>::~TQueue()
+TPriorityQueue<QueueElement>::~TPriorityQueue()
 {
 	myArray.clear();
-	delete myArray;
 }
 
 template<class QueueElement>
-bool TQueue<QueueElement>::empty() const
+bool TPriorityQueue<QueueElement>::empty() const
 {
 	return myArray.empty();
 }
 
 template<class QueueElement>
-void TQueue<QueueElement>::enqueue(const QueueElement& value)
+void TPriorityQueue<QueueElement>::enqueue(const QueueElement& value)
 {
-	myArray.push_back(value);
+	if (empty())
+		myArray.insert(myArray.begin(), value);
+	else
+	{
+		cout << "vector size: " << myArray.size() << endl;
+
+		typename vector<QueueElement>::iterator end = myArray.end();
+		for (int i = myArray.size(); i > 0; i--)
+		{
+			int x = i - 1;
+
+			if (value < myArray[x]) 
+				break;
+			else
+				end = prev(end);
+		}
+
+		myArray.insert(end, value);
+	}
 }
 
 template<class QueueElement>
-void TQueue<QueueElement>::display(ostream& out) const
+void TPriorityQueue<QueueElement>::display(ostream& out) const
 {
-	for (const QueueElement& item : myArray)
+	for (const QueueElement& item : myArray) 
 	{
 		out << item << ", ";
 	}
 }
 
 template<class QueueElement>
-QueueElement TQueue<QueueElement>::front() const
+QueueElement TPriorityQueue<QueueElement>::front() const
 {
 	return myArray.front();
 }
 
 template<class QueueElement>
-void TQueue<QueueElement>::dequeue()
+void TPriorityQueue<QueueElement>::dequeue()
 {
 	myArray.erase(0);
 }
