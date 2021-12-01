@@ -115,23 +115,26 @@ private:
 	vector<QueueElement> myArray;
 };
 
+/*-----------------------------------------------------------------------
+ the vector library already has its constructors, destructors,
+ overloaded operators.
+ There's not really a need to implement more things.
+ -----------------------------------------------------------------------*/
+
+
 template<class QueueElement>
-TQueue<QueueElement>::TQueue()
-{
-	myArray = new vector(0);
-}
+TQueue<QueueElement>::TQueue() {}
 
 template<class QueueElement>
 TQueue<QueueElement>::TQueue(const TQueue& original)
 {
-	myArray = new vector(original.myArray);
+	myArray = original.myArray;
 }
 
 template<class QueueElement>
 TQueue<QueueElement>::~TQueue()
 {
 	myArray.clear();
-	delete myArray;
 }
 
 template<class QueueElement>

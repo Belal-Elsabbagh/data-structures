@@ -55,35 +55,19 @@ LLStack::~LLStack()
 const LLStack& LLStack::operator=(const LLStack& rightSide)
 {
 	/*--------------------------------------------------------------------
-	 The assignment operator is the same as the copy constructor except
-	 for some differences.
-	 The operator erases the data in the left hand side and copies the
-	 right hand side to the left hand side.
+	 The assignment operator uses the copy constructor to assign the
+	 right hand side after clearing the current data in the object.
 	 --------------------------------------------------------------------*/
+
 
 	if (rightSide.empty()) return *this;
 
 	if (this != &rightSide)
 	{
 		this->~LLStack(); // destructs the left hand side
-
-	//-- construct the copy
-		NodePointer origPtr, lastPtr;
-		myTop = new Node(rightSide.myTop->data); // copy first node
-
-		lastPtr = myTop; // sets left hand side to first node
-		origPtr = rightSide.myTop->next; // sets right hand side to point at the node next to first
-
-		while (origPtr != 0)
-		{
-			// intitializes the next node by the data in origPtr
-			lastPtr->next = new Node(origPtr->data);
-
-			// traverses  one node through list
-			origPtr = origPtr->next;
-			lastPtr = lastPtr->next;
-		}
+		LLStack(rightSide); // constructs the copy in this object
 	}
+
 	return *this;
 }
 

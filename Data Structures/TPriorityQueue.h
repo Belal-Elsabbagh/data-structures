@@ -103,16 +103,19 @@ private:
 	vector<QueueElement> myArray;
 };
 
-template<class QueueElement>
-TPriorityQueue<QueueElement>::TPriorityQueue()
-{
+/*-----------------------------------------------------------------------
+ the vector library already has its constructors, destructors,
+ overloaded operators.
+ There's not really a need to implement more things.
+ -----------------------------------------------------------------------*/
 
-}
+template<class QueueElement>
+TPriorityQueue<QueueElement>::TPriorityQueue() {}
 
 template<class QueueElement>
 TPriorityQueue<QueueElement>::TPriorityQueue(const TPriorityQueue& original)
 {
-	myArray = new vector(original.myArray);
+	myArray = original.myArray;
 }
 
 template<class QueueElement>
@@ -141,7 +144,7 @@ void TPriorityQueue<QueueElement>::enqueue(const QueueElement& value)
 		{
 			int x = i - 1;
 
-			if (value < myArray[x]) 
+			if (value < myArray[x])
 				break;
 			else
 				end = prev(end);

@@ -1,4 +1,6 @@
 #include <iostream>
+
+//-- Structure Headers
 #include "StaticList.h"
 #include "DynamicList.h"
 #include "LinkedList.h"
@@ -6,6 +8,8 @@
 #include "DStack.h"
 #include "TQueue.h"
 #include "TPriorityQueue.h"
+#include "LLQueue.h"
+
 using namespace std;
 
 void LLStackTest();
@@ -33,10 +37,42 @@ void LLStackTest()
 
 void TPriorityQueueTest()
 {
-    TPriorityQueue<int> q;
-    q.enqueue(40);
-    q.enqueue(60);
-    q.enqueue(50);
+    TPriorityQueue<int> q1;
+    q1.enqueue(40);
+    q1.enqueue(60);
+    q1.enqueue(50);
 
-    q.display(cout);
+    TPriorityQueue<int> q2 = q1;
+    q2.display(cout);
+
+    q2.dequeue();
+    q2.display(cout);
+}
+
+void LLQueueTest()
+{
+    LLQueue<int> q1;
+    q1.enqueue(40);
+    q1.enqueue(60);
+    q1.enqueue(50);
+
+    LLQueue<int> q2 = q1;
+    q2.display(cout);
+
+    q2.dequeue();
+    q2.display(cout);
+}
+
+void LinkedListTest()
+{
+    LinkedList q1;
+    q1.insert(40, 0);
+    q1.insert(50, 1);
+    q1.insert(60, 2);
+
+    LinkedList q2 = q1;
+    q2.display(cout);
+
+    q2.erase(1);
+    q2.display(cout);
 }

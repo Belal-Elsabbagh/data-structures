@@ -32,7 +32,7 @@ DynamicList::DynamicList(const DynamicList& origList) : mySize(origList.mySize),
 	if (myArray == 0)
 	{
 		cerr << "\nCouldn't allocate memory. Exiting...\n\a";
-		exit;
+		exit(1);
 	}
 	for (int i = 0; i < mySize; i++)
 		myArray[i] = origList.myArray[i];
@@ -51,7 +51,7 @@ const DynamicList& DynamicList::operator=(const DynamicList& rightHandSide)
 		if (myArray == 0)
 		{
 			cout << "\nCouldn't allocate memory. Exiting...\n\a";
-			exit;
+			exit(1);
 		}
 		mySize = rightHandSide.mySize;
 		for (int i = 0; i < mySize; i++)

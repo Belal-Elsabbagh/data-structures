@@ -49,10 +49,8 @@ LinkedList::~LinkedList()
 const LinkedList& LinkedList::operator=(const LinkedList& rightSide)
 {
 	/*--------------------------------------------------------------------
-	 The assignment operator is the same as the copy constructor except
-	 for some differences.
-	 The operator erases the data in the left hand side and copies the
-	 right hand side to the left hand side.
+	 The assignment operator uses the copy constructor to assign the
+	 right hand side after clearing the current data in the object.
 	 --------------------------------------------------------------------*/
 
 
@@ -61,24 +59,9 @@ const LinkedList& LinkedList::operator=(const LinkedList& rightSide)
 	if (this != &rightSide)
 	{
 		this->~LinkedList(); // destructs the left hand side
-
-	//-- construct the copy
-		NodePointer origPtr, lastPtr;
-		first = new Node(rightSide.first->data); // copy first node
-
-		lastPtr = first; // sets left hand side to first node
-		origPtr = rightSide.first->next; // sets right hand side to point at the node next to first
-		
-		while (origPtr != 0)
-		{
-			// intitializes the next node by the data in origPtr
-			lastPtr->next = new Node(origPtr->data);
-
-			// traverses  one node through list
-			origPtr = origPtr->next;
-			lastPtr = lastPtr->next;
-		}
+		LinkedList(rightSide); // constructs the copy in this object
 	}
+
 	return *this;
 }
 

@@ -22,7 +22,7 @@ DStack::DStack(const DStack& original)
 	if (myArray == 0)
 	{
 		cerr << "\nCouldn't allocate memory. Exiting...\n\a";
-		exit;
+		exit(1);
 	}
 	myTop = original.myTop;
 	for (int i = 0; i < myCapacity; i++)
