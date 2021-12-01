@@ -1,4 +1,4 @@
-/*-- TQueue.h -------------------------------------------------------------
+/*-- LLQueue.h -------------------------------------------------------------
 
  This header file defines a Queue data type.
  Basic operations:
@@ -11,20 +11,16 @@
  Note: Execution terminates if memory isn't available for a queue element.
  ---------------------------------------------------------------------------*/
 
-#include<iostream>
-#include<vector>
+#include <iostream>
 using namespace std;
 
 template<class QueueElement>
-class TQueue
+class LLQueue
 {
 public:
 	/***** Function Members *****/
-	//(3) - Apply the required changes to each function definition from the following
-
-
 	/***** Constructors *****/
-	TQueue();
+	LLQueue();
 	/*-----------------------------------------------------------------------
 	 Construct a Queue object.
 
@@ -33,7 +29,7 @@ public:
 	 (myFront and myBack are initialized to null pointers).
 	 -----------------------------------------------------------------------*/
 
-	TQueue(const TQueue& original);
+	LLQueue(const LLQueue& original);
 	/*-----------------------------------------------------------------------
 	 Copy Constructor
 
@@ -43,7 +39,7 @@ public:
 	 -----------------------------------------------------------------------*/
 
 	 /***** Destructor *****/
-	~TQueue();
+	~LLQueue();
 	/*-----------------------------------------------------------------------
 	 Class destructor
 
@@ -52,7 +48,7 @@ public:
 	 -----------------------------------------------------------------------*/
 
 	 /***** Assignment *****/
-	const TQueue& operator= (const TQueue& rightHandSide);
+	const LLQueue& operator= (const LLQueue& rightHandSide);
 	/*-----------------------------------------------------------------------
 	 Assignment Operator
 
@@ -108,58 +104,108 @@ public:
 
 private:
 
-	//(4) - The member variable here will be a Vector from the Standard Template Library in C++
-	// Therefore, you need to remove the LinkedList used and replace it with this Vector that you'll create
-	//Hint: use #include <vector> at the begining of the file
+		/*** Node class ***/
+	class Node
+	{
+	public:
+		QueueElement data;
+		Node* next;
 
-	vector<QueueElement> myArray;
-};
+		//--- Node constructor
+		Node(QueueElement value) { data = value; next = 0; }
+		/*-------------------------------------------------------------------
+		 Precondition:  value and link are received
+		 Postcondition: A Node has been constructed with value in its
+		 data part and its next part set to link (default 0).
+		 ------------------------------------------------------------------*/
+	};
 
-template<class QueueElement>
-TQueue<QueueElement>::TQueue()
+	typedef Node* NodePointer;
+
+	/***** Data Members *****/
+	NodePointer myFront,      // pointer to front of queue
+				myBack;       // pointer to back of queue
+
+}; // end of class declaration
+
+template <class QueueElement>
+LLQueue<QueueElement>::LLQueue() 
 {
-	myArray = new vector(0);
+	myFront = myBack = 0;
 }
 
 template<class QueueElement>
-TQueue<QueueElement>::TQueue(const TQueue& original)
+LLQueue<QueueElement>::LLQueue(const LLQueue& original)
 {
-	myArray = new vector(original.myArray);
+	NodePointer origPtr, lastPtr;
+	myFront = new Node(original.myFront->data); // copy first node
+
+	// set pointers to point to the first nodes in both lists respectively
+	lastPtr = myFront;
+	origPtr = original.myFront->next; // makes origPtr leading by one node
+
+	while (origPtr != original.myBack) //as long as the original list isn't at the end
+	{
+		// intitializes the next node by the data in origPtr
+		lastPtr->next = new Node(origPtr->data);
+
+		// traverses through list
+		origPtr = origPtr->next;
+		lastPtr = lastPtr->next;
+	}
+	myBack = lastPtr;
 }
 
 template<class QueueElement>
-TQueue<QueueElement>::~TQueue()
+LLQueue<QueueElement>::~LLQueue()
 {
-	myArray.clear();
-	delete myArray;
+	NodePointer prev = myFront,
+				ptr;
+	while (prev != myBack)
+	{
+		ptr = prev->next; // pointer catches the next node in the list
+		delete prev; // delete current node
+		prev = ptr; // set the current node to next
+	}
+	myBack = myFront;
 }
 
 template<class QueueElement>
-bool TQueue<QueueElement>::empty() const
+bool LLQueue<QueueElement>::empty() const
 {
-	return myArray.empty();
+	return myBack == myFront;
 }
 
 template<class QueueElement>
-void TQueue<QueueElement>::enqueue(const QueueElement& value)
+void LLQueue<QueueElement>::enqueue(const QueueElement& value)
 {
-	myArray.push_back(value);
+	NodePointer temp = new Node(value);
+
+	if (myBack == NULL) 
+	{
+		myFront = myBack = temp;
+		return;
+	}
+		myBack->next = temp;
+		myBack = temp;
 }
 
 template<class QueueElement>
-void TQueue<QueueElement>::display(ostream& out) const
+void LLQueue<QueueElement>::dequeue()
 {
+	// If queue is empty, return NULL.
+	if (front == NULL)
+		return;
 
-}
+	// Store previous front and
+	// move front one node ahead
+	NodePointer temp = myFront;
+	myFront = myFront->next;
 
-template<class QueueElement>
-QueueElement TQueue<QueueElement>::front() const
-{
-	return myArray.front();
-}
+	// If front becomes NULL, then
+	// change rear also as NULL
+	if (myFront == NULL)
+		myBack = NULL;
 
-template<class QueueElement>
-void TQueue<QueueElement>::dequeue()
-{
-	myArray.erase(0);
+	delete temp;
 }

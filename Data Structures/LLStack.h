@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <iostream>
 using namespace std;
-typedef string StackElement;
+typedef int StackElement;
 class LLStack
 {
 private:

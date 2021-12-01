@@ -7,16 +7,22 @@ LLStack::LLStack()
 
 LLStack::LLStack(const LLStack& original)
 {
-	if (original.empty()) {
+	if (original.empty()) 
+	{
 		myTop = nullptr;
 	}
-	else {
+
+	else 
+	{
 		NodePointer p = original.myTop;
 		NodePointer tmp = new Node(p->data);
+
 		myTop = tmp;
 		myTop->next = p->next;
+
 		NodePointer tail = tmp;
-		while (p->next != nullptr) {
+		while (p->next != nullptr) 
+		{
 			p = p->next;
 			tmp = new Node(p->data);
 			tail->next = tmp;
@@ -48,7 +54,8 @@ const LLStack& LLStack::operator=(const LLStack& rightHandSide)
 		myTop = tmp;
 		myTop->next = p->next;
 		NodePointer tail = tmp;
-		while (p->next != nullptr) {
+		while (p->next != nullptr) 
+		{
 			p = p->next;
 			tmp = new Node(p->data);
 			tail->next = tmp;
@@ -91,6 +98,7 @@ void LLStack::pop()
 
 void LLStack::intersection(const LLStack& s1, LLStack& s)
 {
+	
 }
 
 StackElement LLStack::bottom() const

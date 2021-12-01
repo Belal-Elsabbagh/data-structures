@@ -50,6 +50,9 @@
     <ClInclude Include="StaticList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LLQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="TQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>

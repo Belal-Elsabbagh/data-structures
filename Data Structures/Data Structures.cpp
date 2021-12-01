@@ -9,5 +9,16 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello World!\n";
+    LLStack stack;
+    stack.empty() ? cout<<"Empty\n" : cout<<"Not Empty\n";
+    for (int i = 0; i < 10; i++)
+    {
+        stack.push(i);
+    }
+    stack.display(cout);
+    cout << endl;
+
+    stack.pop();
+    stack.display(cout);
+
 }

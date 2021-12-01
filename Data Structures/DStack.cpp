@@ -53,7 +53,7 @@ bool DStack::empty() const
 	return myTop == -1;
 }
 
-void DStack::push(const StackElement& value)
+void DStack::push(const StackElement value)
 {
 	if (myTop == myCapacity-1)
 	{
