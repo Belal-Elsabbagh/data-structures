@@ -7,19 +7,20 @@ LinkedList::LinkedList() // uses initialization list to set the first pointer an
 	: first(0), mySize(0)
 {}
 
-//-- Definition of the class constructor
-LinkedList::LinkedList(const LinkedList& origList)
-	: first(0), mySize(origList.mySize)
+//-- Definition of the class copy constructor
+LinkedList::LinkedList(const LinkedList& original)
+	: first(0), mySize(original.mySize)
 {
 	//mySize = origList.mySize;
 	//first = 0;
 	if (mySize == 0) return;
+
 	NodePointer origPtr, lastPtr;
-	first = new Node(origList.first->data); // copy first node
+	first = new Node(original.first->data); // copy first node
 	
 	// set pointers to point to the first nodes in both lists respectively
 	lastPtr = first;
-	origPtr = origList.first->next; // makes origPtr leading by one node
+	origPtr = original.first->next; // makes origPtr leading by one node
 
 	while (origPtr != 0) //as long as the original list isn't at the end
 	{
@@ -53,14 +54,15 @@ const LinkedList& LinkedList::operator=(const LinkedList& rightSide)
 	 The operator erases the data in the left hand side and copies the
 	 right hand side to the left hand side.
 	 --------------------------------------------------------------------*/
-	mySize = rightSide.mySize;
-	first = 0;
-	if (mySize == 0) return *this;
+
+
+	if (rightSide.mySize == 0) return *this;
+
 	if (this != &rightSide)
 	{
 		this->~LinkedList(); // destructs the left hand side
 
-	// constructs the copy
+	//-- construct the copy
 		NodePointer origPtr, lastPtr;
 		first = new Node(rightSide.first->data); // copy first node
 

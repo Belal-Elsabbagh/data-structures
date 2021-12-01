@@ -102,6 +102,8 @@ public:
 	 and execution allowed to proceed.
 	 -----------------------------------------------------------------------*/
 
+	typedef Node* NodePointer;
+
 private:
 
 		/*** Node class ***/
@@ -119,8 +121,6 @@ private:
 		 data part and its next part set to link (default 0).
 		 ------------------------------------------------------------------*/
 	};
-
-	typedef Node* NodePointer;
 
 	/***** Data Members *****/
 	NodePointer myFront,      // pointer to front of queue
@@ -168,6 +168,42 @@ LLQueue<QueueElement>::~LLQueue()
 		prev = ptr; // set the current node to next
 	}
 	myBack = myFront;
+}
+
+template<class QueueElement>
+const LLQueue<QueueElement>& LLQueue<QueueElement>::operator=(const LLQueue<QueueElement>& rightSide)
+{
+	/*--------------------------------------------------------------------
+	 The assignment operator is the same as the copy constructor except
+	 for some differences.
+	 The operator erases the data in the left hand side and copies the
+	 right hand side to the left hand side.
+	 --------------------------------------------------------------------*/
+
+	if (rightSide.mySize == 0) return *this;
+
+	if (this != &rightSide)
+	{
+		this->~LinkedList(); // destructs the left hand side
+
+	//-- construct the copy
+		NodePointer origPtr, lastPtr;
+		first = new Node(rightSide.first->data); // copy first node
+
+		lastPtr = first; // sets left hand side to first node
+		origPtr = rightSide.first->next; // sets right hand side to point at the node next to first
+
+		while (origPtr != 0)
+		{
+			// intitializes the next node by the data in origPtr
+			lastPtr->next = new Node(origPtr->data);
+
+			// traverses  one node through list
+			origPtr = origPtr->next;
+			lastPtr = lastPtr->next;
+		}
+	}
+	return *this;
 }
 
 template<class QueueElement>
