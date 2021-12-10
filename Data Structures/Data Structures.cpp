@@ -9,11 +9,13 @@
 #include "TQueue.h"
 #include "TPriorityQueue.h"
 #include "LLQueue.h"
+#include "BST.h"
 
 using namespace std;
 
 void LLStackTest();
 void TPriorityQueueTest();
+void BinaryTreeTest();
 
 int main()
 {
@@ -75,4 +77,9 @@ void LinkedListTest()
 
     q2.erase(1);
     q2.display(cout);
+}
+
+void BinaryTreeTest()
+{
+    
 }

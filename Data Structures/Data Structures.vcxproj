@@ -147,6 +147,7 @@
     <ClCompile Include="StaticList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BST.h" />
     <ClInclude Include="DStack.h" />
     <ClInclude Include="DynamicList.h" />
     <ClInclude Include="TPriorityQueue.h" />
