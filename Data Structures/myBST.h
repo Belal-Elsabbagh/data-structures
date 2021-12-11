@@ -285,26 +285,32 @@ bool BST<DataType>::search(const DataType& item) const
 template<typename DataType>
 void BST<DataType>::insert(const DataType& item)
 {
-	BinNodePointer ptr = myRoot;
-
-	while (true)
+	BinNodePointer ptr = myRoot, parent = 0;        
+	bool found = false;     
+	
+	while (!found && ptr != 0)
 	{
-		if (!ptr)
-		{
-			ptr = new BinNode(item);
-			return;
-		}
-
-		else if (item > ptr->data)
-			ptr = ptr->right;
-		else if (item < ptr->data)
+		parent = ptr;
+		if (item < ptr->data)       
 			ptr = ptr->left;
-		else
-		{
-			cerr << "Item already in the tree\n";
-			return;
-		}
+		else if (ptr->data < item)  
+			ptr = ptr->right;
+		else                           
+			found = true;
 	}
+
+	if (!found)
+	{
+		ptr = new BinNode(item);
+		if (parent == 0)               
+			myRoot = ptr;
+		else if (item < parent->data) 
+			parent->left = ptr;
+		else                         
+			parent->right = ptr;
+	}
+	else
+		cout << "Item already in the tree\n";
 }
 
 template<typename DataType>
