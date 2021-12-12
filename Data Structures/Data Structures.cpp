@@ -15,11 +15,11 @@ using namespace std;
 
 void LLStackTest();
 void TPriorityQueueTest();
-void BinaryTreeTest();
+void BSTreeTest();
 
 int main()
 {
-    TPriorityQueueTest();
+    BSTreeTest();
 }
 
 void LLStackTest()
@@ -79,7 +79,13 @@ void LinkedListTest()
     q2.display(cout);
 }
 
-void BinaryTreeTest()
+void BSTreeTest()
 {
-    
+    BST<int> tree;
+
+    tree.empty() ? "empty" : "not empty";
+    tree.insert(3);
+    tree.insert(6);
+    tree.search(3) ? "found" : "not found";
+
 }

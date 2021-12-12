@@ -1,12 +1,16 @@
+#include <functional>
+#include <iostream>
 
 template <class DataType>
 class BST
 {
+public:
 	class BinNode
 	{
 	public:
 		DataType data;
-		BinNode* left, right;
+		BinNode* left;
+		BinNode* right;
 
 		BinNode() : left(0), right(0)
 		{}
@@ -16,57 +20,71 @@ class BST
 	};
 
 	typedef BinNode* BinNodePointer;
-	
-	BinNodePointer myRoot;
 
+	bool empty() const;
+
+	bool searchAux(BinNodePointer subRoot, const DataType& item);
 	bool search(const DataType& item);
+	
+	void insertAux(BinNodePointer subRoot, const DataType& item);
 	void insert(const DataType& item);
+	
 	void remove(const DataType& item);
+
+private:
+	BinNodePointer myRoot;
 };
+
+template<class DataType>
+bool BST<DataType>::empty() const
+{
+	return myRoot == 0;
+}
+
+template<class DataType>
+bool BST<DataType>::searchAux(BinNodePointer subRoot, const DataType& item)
+{
+	if (!subRoot)
+		return false;
+	else if (item < subRoot->data)
+		return searchAux(subRoot->left, item);
+	else if (item > subRoot->data)
+		return searchAux(subRoot->right, item);
+	else
+		return true;
+}
 
 template<class DataType>
 bool BST<DataType>::search(const DataType& item)
 {
-	function<void(BinNodePointer subRoot) const> searchAUX; //definition of the search function
-	searchAUX = [&](BinNodePointer subRoot)
-	{
-		if (subRoot == 0)
-			return false;
-		if (item < subRoot->data)
-			return searchAUX(subRoot->left);
-		else if
-			return searchAUX(subRoot->right);
-		else
-			return true;
-	};
+	return searchAux(myRoot, item);
+}
 
-	return searchAUX(root);
+template<class DataType>
+void BST<DataType>::insertAux(BinNodePointer subRoot, const DataType& item)
+{
+	if (!subRoot)
+		subRoot = new BinNode(item);
+	else if (item < subRoot->data)
+		insertAux(subRoot->left, item);
+	else if (item > subRoot->data)
+		insertAux(subRoot->right, item);
+	else
+		cerr << "Item is already in tree\n";
 }
 
 template<class DataType>
 void BST<DataType>::insert(const DataType& item)
 {
-	function<void(BinNodePointer subRoot) const> insertAUX; //definition of the search function
-	insertAUX = [&](BinNodePointer subRoot)
-	{
-		if (subRoot == 0)
-			subRoot = new BinNode(item);
-		if (item < subRoot->data)
-			insertAUX(subRoot->left);
-		else if
-			insertAUX(subRoot->right);
-		else
-			cerr << "Item is already in tree\n";
-	};
 
-	return insertAUX(root);
+	return insertAux(myRoot, item);
 }
 
 template<class DataType>
 void BST<DataType>::remove(const DataType& item)
 {
 	bool found;
-	BST<DataType>::BinNodePointer, x, parent;
+	BST<DataType>::BinNodePointer x, parent;
 
 	search2(item, found, x, parent);
 
@@ -76,7 +94,7 @@ void BST<DataType>::remove(const DataType& item)
 		return;
 	}
 
-	if (x->left != 0 && x-> != 0)
+	if (x->left != 0 && x->right != 0)
 	{
 		BST<DataType>::BinNodePointer xSucc = x->right;
 		parent = x;
