@@ -140,16 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Data Structures.cpp" />
-    <ClCompile Include="DStack.cpp" />
-    <ClCompile Include="DynamicList.cpp" />
-    <ClCompile Include="LinkedList.cpp" />
-    <ClCompile Include="LLStack.cpp" />
-    <ClCompile Include="StaticList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BST.h" />
     <ClInclude Include="DStack.h" />
     <ClInclude Include="DynamicList.h" />
+    <ClInclude Include="LLPriorityQueue.h" />
     <ClInclude Include="TPriorityQueue.h" />
     <ClInclude Include="TQueue.h" />
     <ClInclude Include="LinkedList.h" />

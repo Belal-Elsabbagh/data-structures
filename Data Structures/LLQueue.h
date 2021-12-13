@@ -223,10 +223,16 @@ void LLQueue<QueueElement>::display(ostream& out) const
 }
 
 template<class QueueElement>
+QueueElement LLQueue<QueueElement>::front() const
+{
+	return myFront;
+}
+
+template<class QueueElement>
 void LLQueue<QueueElement>::dequeue()
 {
 	// If queue is empty, return NULL.
-	if (front == NULL)
+	if (myFront == NULL)
 		return;
 
 	// Store previous front and

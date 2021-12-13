@@ -139,18 +139,18 @@ void TPriorityQueue<QueueElement>::enqueue(const QueueElement& value)
 	{
 		cout << "vector size: " << myArray.size() << endl;
 
-		typename vector<QueueElement>::iterator end = myArray.end();
-		for (int i = myArray.size(); i > 0; i--)
+		typename vector<QueueElement>::iterator iter;
+		for (iter = myArray.end(); iter != iter.begin(); iter--)
 		{
 			int x = i - 1;
 
 			if (value < myArray[x])
 				break;
 			else
-				end = prev(end);
+				iter = prev(iter);
 		}
 
-		myArray.insert(end, value);
+		myArray.insert(iter, value);
 	}
 }
 
@@ -172,5 +172,5 @@ QueueElement TPriorityQueue<QueueElement>::front() const
 template<class QueueElement>
 void TPriorityQueue<QueueElement>::dequeue()
 {
-	myArray.erase(0);
+	myArray.erase(myArray.end());
 }

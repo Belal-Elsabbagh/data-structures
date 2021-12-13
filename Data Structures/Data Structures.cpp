@@ -9,32 +9,35 @@
 #include "TQueue.h"
 #include "TPriorityQueue.h"
 #include "LLQueue.h"
-#include "BST.h"
 
 using namespace std;
 
 void LLStackTest();
 void TPriorityQueueTest();
-void BSTreeTest();
 
 int main()
 {
-    BSTreeTest();
+    LLStackTest();
 }
 
 void LLStackTest()
 {
     LLStack stack;
     stack.empty() ? cout << "Empty\n" : cout << "Not Empty\n";
-    for (int i = 0; i < 10; i++)
+    
+    for (size_t i = 0; i < 10; i++)
     {
         stack.push(i);
     }
+
     stack.display(cout);
     cout << endl;
 
     stack.pop();
     stack.display(cout);
+
+    cout << "\nTop is: "  << stack.top()    << endl
+         << "Bottom is: " << stack.bottom() << endl;
 }
 
 void TPriorityQueueTest()
@@ -77,15 +80,4 @@ void LinkedListTest()
 
     q2.erase(1);
     q2.display(cout);
-}
-
-void BSTreeTest()
-{
-    BST<int> tree;
-
-    tree.empty() ? "empty" : "not empty";
-    tree.insert(3);
-    tree.insert(6);
-    tree.search(3) ? "found" : "not found";
-
 }

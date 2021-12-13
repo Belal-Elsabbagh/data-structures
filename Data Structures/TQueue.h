@@ -121,10 +121,6 @@ private:
  There's not really a need to implement more things.
  -----------------------------------------------------------------------*/
 
-
-template<class QueueElement>
-TQueue<QueueElement>::TQueue() {}
-
 template<class QueueElement>
 TQueue<QueueElement>::TQueue(const TQueue& original)
 {

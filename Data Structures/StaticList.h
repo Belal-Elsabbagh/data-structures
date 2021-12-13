@@ -114,3 +114,117 @@ public:
 ostream& operator<< (ostream& out, const StaticList& aList);
 
 #endif
+
+StaticList::StaticList()
+{
+	mySize = 0;
+}
+
+StaticList::StaticList(const StaticList& origList) : mySize(origList.mySize)
+{
+	for (int i = 0; i < mySize; i++)
+		myArray[i] = origList.myArray[i];
+}
+
+const StaticList& StaticList::operator=(const StaticList& rightHandSide)
+{
+	// TODO: insert return statement here
+	return *this;
+}
+
+bool StaticList::empty() const
+{
+	return mySize == 0;
+}
+
+void StaticList::insert(ElementType item, int pos)
+{
+	if (mySize == CAPACITY)
+	{
+		cerr << "No space to insert.\n\a";
+		exit(1);
+	}
+	if (pos < 0 || pos > mySize)
+	{
+		cerr << "Invalid Insertion. Operation Terminated with no change.\n\a";
+		return;
+	}
+	else // after validating size and index...
+	{
+		// shift elements to the right
+		for (int i = mySize; i > pos; i--)
+		{
+			myArray[i] = myArray[i - 1];
+		}
+
+		myArray[pos] = item; // insert element
+		mySize++; // increase size by 1
+	}
+}
+
+void StaticList::erase(int pos)
+{
+	if (pos < 0 || pos >= mySize || mySize == 0)
+		cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
+	else
+	{
+		// shift elements to the left & overwrite the element to be erased
+		for (int i = pos; i < mySize; i++)
+		{
+			myArray[i] = myArray[i + 1];
+		}
+		mySize--;
+	}
+}
+
+void StaticList::display(ostream& out) const
+{
+	cout << "\nDisplaying List...\n";
+	for (int i = 0; i < mySize; i++)
+	{
+		cout << myArray[i] << ", ";
+	}
+}
+
+void StaticList::leftRotation(int numOfRotations)
+{
+	for (int j = 0; j < numOfRotations; j++)
+	{
+		ElementType temp = myArray[0];
+		for (int i = 0; i < mySize; i++)
+		{
+			myArray[i] = myArray[i + 1];
+		}
+		myArray[mySize - 1] = temp;
+	}
+}
+
+void StaticList::removeDuplicates()
+{
+	for (int i = 0; i < mySize; i++)
+	{
+		for (int j = i + 1; j < mySize; j++)
+		{
+			if (myArray[i] == myArray[j])
+				this->erase(j);
+		}
+	}
+}
+
+void StaticList::deleteByValue(ElementType item)
+{
+	for (int i = 0; i < mySize; i++)
+	{
+		if (item == myArray[i])
+		{
+			this->erase(i);
+			return;
+		}
+	}
+}
+
+ostream& operator<<(ostream& out, const StaticList& aList)
+{
+	aList.display(out);
+	return out;
+}
