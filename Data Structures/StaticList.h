@@ -108,6 +108,7 @@ public:
     void leftRotation(int numOfRotations);
     void removeDuplicates();
     void deleteByValue(ElementType item);
+	ostream& operator<<(ostream& out);
 
 }; //--- end of List class
 
@@ -234,8 +235,8 @@ void StaticList<ElementType>::deleteByValue(ElementType item)
 	}
 }
 
-ostream& operator<<(ostream& out, const StaticList& aList)
+ostream& StaticList<ElementType>::operator<<(ostream& out)
 {
-	aList.display(out);
+	this->display(out);
 	return out;
 }

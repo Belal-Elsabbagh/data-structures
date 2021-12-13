@@ -24,7 +24,7 @@ int main()
 
 void LLStackTest()
 {
-    LLStack stack;
+    LLStack<int> stack;
     stack.empty() ? cout << "Empty\n" : cout << "Not Empty\n";
     
     for (size_t i = 0; i < 10; i++)
@@ -32,7 +32,7 @@ void LLStackTest()
         stack.push(i);
     }
 
-    stack.display(cout);
+    cout << stack;
     cout << endl;
 
     stack.pop();
@@ -87,12 +87,12 @@ void LLPriorityQueueTest()
 
 void LinkedListTest()
 {
-    LinkedList q1;
+    LinkedList<int> q1;
     q1.insert(40, 0);
     q1.insert(50, 1);
     q1.insert(60, 2);
 
-    LinkedList q2 = q1;
+    LinkedList<int> q2 = q1;
     q2.display(cout);
 
     q2.erase(1);

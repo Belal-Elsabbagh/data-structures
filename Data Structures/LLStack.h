@@ -258,7 +258,7 @@ void LLStack<StackElement>::intersection(const LLStack<StackElement>& s1, LLStac
 template<class StackElement>
 StackElement LLStack<StackElement>::bottom() const
 {
-	LLStack temp(*this);
+	LLStack<StackElement> temp(*this);
 	NodePointer ptr = temp.myTop;
 
 	while (ptr->next)
@@ -270,8 +270,9 @@ StackElement LLStack<StackElement>::bottom() const
 	temp.~LLStack();
 }
 
-ostream& operator<<(ostream& out, LLStack<StackElement>& list)
+template<class StackElement>
+ostream& operator<<(ostream& out, const LLStack<StackElement>& obj)
 {
-	list.display(out);
+	obj.display(out);
 	return out;
 }

@@ -134,6 +134,8 @@ public:
      inserted into out.
      -----------------------------------------------------------------------*/
 
+    ostream& operator<<(ostream& out);
+
 }; //--- end of List class
 
 template<class ElementType>
@@ -259,9 +261,9 @@ void DynamicList<ElementType>::display(ostream& out) const
     }
 }
 
-ostream& operator<<(ostream& out, const DynamicList<ElementType>& aList)
+ostream& DynamicList<ElementType>::operator<<(ostream& out)
 {
-    aList.display(out);
+    this->display(out);
     return out;
 }
 
