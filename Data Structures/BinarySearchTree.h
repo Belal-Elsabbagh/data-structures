@@ -34,11 +34,11 @@ using namespace std;
 #define MyBST_h
 
 template <typename DataType>
-class BST
+class ModelBST
 {
 public:
     /***** Function Members *****/
-    BST();
+    ModelBST();
     /*------------------------------------------------------------------------
      Construct a BST object.
      
@@ -137,7 +137,7 @@ private:
      ------------------------------------------------------------------------*/
     
     void inorderAux(ostream & out,
-                    BST<DataType>::BinNodePointer subtreePtr) const;
+                    ModelBST<DataType>::BinNodePointer subtreePtr) const;
     /*------------------------------------------------------------------------
      Inorder traversal auxiliary function.
      
@@ -148,7 +148,7 @@ private:
      ------------------------------------------------------------------------*/
     
     void graphAux(ostream & out, int indent,
-                  BST<DataType>::BinNodePointer subtreeRoot) const;
+                  ModelBST<DataType>::BinNodePointer subtreeRoot) const;
     /*------------------------------------------------------------------------
      Graph auxiliary function.
      
@@ -158,12 +158,11 @@ private:
      to by subtreePtr has been output to out, indented indent spaces.
      ------------------------------------------------------------------------*/
     //-----------------------Search & Insert functions recursively-----------------------
-    /*
     inline bool SearchReq(const DataType& item) const;
     bool SearchReqAux(BinNodePointer SubtreeRoot, const DataType& item)const;
     
     inline void insertReq(const DataType& item);
-    void insertReqAux(BinNodePointer & SubtreeRoot, const DataType& item);* /
+    void insertReqAux(BinNodePointer & SubtreeRoot, const DataType& item);
     
     /***** Data Members *****/
     
@@ -173,20 +172,20 @@ private:
 
 //--- Definition of constructor
 template <typename DataType>
-inline BST<DataType>::BST()
+inline ModelBST<DataType>::ModelBST()
 : myRoot(0)
 {}
 
 //--- Definition of empty()
 template <typename DataType>
-inline bool BST<DataType>::empty() const
+inline bool ModelBST<DataType>::empty() const
 { return myRoot == 0; }
 
 //--- Definition of search()
 template <typename DataType>
-bool BST<DataType>::search(const DataType & item) const
+bool ModelBST<DataType>::search(const DataType & item) const
 {
-    BST<DataType>::BinNodePointer locptr = myRoot;
+    ModelBST<DataType>::BinNodePointer locptr = myRoot;
     bool found = false;
     while (!found && locptr != 0)
     {
@@ -202,9 +201,9 @@ bool BST<DataType>::search(const DataType & item) const
 
 //--- Definition of insert()
 template <typename DataType>
-inline void BST<DataType>::insert(const DataType & item)
+inline void ModelBST<DataType>::insert(const DataType & item)
 {
-    BST<DataType>::BinNodePointer
+    ModelBST<DataType>::BinNodePointer
     locptr = myRoot,   // search pointer
     parent = 0;        // pointer to parent of current node
     bool found = false;     // indicates if item already in BST
@@ -220,7 +219,7 @@ inline void BST<DataType>::insert(const DataType & item)
     }
     if (!found)
     {                                 // construct node containing item
-        locptr = new BST<DataType>::BinNode(item);
+        locptr = new ModelBST<DataType>::BinNode(item);
         if (parent == 0)               // empty tree
             myRoot = locptr;
         else if (item < parent->data )  // insert to left of parent
@@ -234,10 +233,10 @@ inline void BST<DataType>::insert(const DataType & item)
 
 //--------- Definition of remove() -----------------------------------------------
 template <typename DataType>
-void BST<DataType>::remove(const DataType & item)
+void ModelBST<DataType>::remove(const DataType & item)
 {
     bool found;                      // signals if item is found
-    BST<DataType>::BinNodePointer
+    ModelBST<DataType>::BinNodePointer
     x,                            // points to node to be deleted
     parent;                       //    "    " parent of x and xSucc
     search2(item, found, x, parent);
@@ -249,7 +248,7 @@ void BST<DataType>::remove(const DataType & item)
     //else
     if (x->left != 0 && x->right != 0){   // node has 2 children
         // Find x's inorder successor and its parent
-        BST<DataType>::BinNodePointer xSucc = x->right;
+        ModelBST<DataType>::BinNodePointer xSucc = x->right;
         parent = x;
         while (xSucc->left != 0){       // descend left
             parent = xSucc;
@@ -262,7 +261,7 @@ void BST<DataType>::remove(const DataType & item)
     } // end if node has 2 children
     
     // Now proceed with case where node has 0 or 1 child
-    BST<DataType>::BinNodePointer
+    ModelBST<DataType>::BinNodePointer
     subtree = x->left;             // pointer to a subtree of x
     if (subtree == 0)
         subtree = x->right;
@@ -277,21 +276,21 @@ void BST<DataType>::remove(const DataType & item)
 
 //--- Definition of inorder()
 template <typename DataType>
-inline void BST<DataType>::inorder(ostream & out) const
+inline void ModelBST<DataType>::inorder(ostream & out) const
 {
     inorderAux(out, myRoot);
 }
 
 //--- Definition of graph()
 template <typename DataType>
-inline void BST<DataType>::graph(ostream & out) const
+inline void ModelBST<DataType>::graph(ostream & out) const
 { graphAux(out, 0, myRoot); }
 
 //--- Definition of search2()
 template <typename DataType>
-void BST<DataType>::search2(const DataType & item, bool & found,
-                            BST<DataType>::BinNodePointer & locptr,
-                            BST<DataType>::BinNodePointer & parent) const
+void ModelBST<DataType>::search2(const DataType & item, bool & found,
+                            ModelBST<DataType>::BinNodePointer & locptr,
+                            ModelBST<DataType>::BinNodePointer & parent) const
 {
     locptr = myRoot;
     parent = 0;
@@ -315,8 +314,8 @@ void BST<DataType>::search2(const DataType & item, bool & found,
 
 //--- Definition of inorderAux()
 template <typename DataType>
-void BST<DataType>::inorderAux(ostream & out,
-                               BST<DataType>::BinNodePointer subtreeRoot) const
+void ModelBST<DataType>::inorderAux(ostream & out,
+                               ModelBST<DataType>::BinNodePointer subtreeRoot) const
 {
     if (subtreeRoot != 0)
     {
@@ -328,8 +327,8 @@ void BST<DataType>::inorderAux(ostream & out,
 
 //--- Definition of graphAux()
 template <typename DataType>
-void BST<DataType>::graphAux(ostream & out, int indent,
-                             BST<DataType>::BinNodePointer subtreeRoot) const
+void ModelBST<DataType>::graphAux(ostream & out, int indent,
+                             ModelBST<DataType>::BinNodePointer subtreeRoot) const
 {
     if (subtreeRoot != 0)
     {
@@ -340,15 +339,15 @@ void BST<DataType>::graphAux(ostream & out, int indent,
 }
 
 //------------ Definition of SearchReq -------------------------------------
-/*template <typename DataType>
-inline bool BST<DataType>::SearchReq(const DataType & item) const
+template <typename DataType>
+inline bool ModelBST<DataType>::SearchReq(const DataType & item) const
 {
     return SearchReqAux(myRoot, item);
 }
 
 //----------- Definition of SearchReqAux -------------------------------------
 template <typename DataType>
-bool BST<DataType>::SearchReqAux(BST<DataType>::BinNodePointer SubtreeRoot, const DataType& item)const
+bool ModelBST<DataType>::SearchReqAux(ModelBST<DataType>::BinNodePointer SubtreeRoot, const DataType& item)const
 {
     if(SubtreeRoot==0)      //empty subtree
         return false;
@@ -363,17 +362,17 @@ bool BST<DataType>::SearchReqAux(BST<DataType>::BinNodePointer SubtreeRoot, cons
 
 //--------- Definition of insertReq --------------------------------------------
 template <typename DataType>
-void BST<DataType>::insertReq(const DataType & item)
+void ModelBST<DataType>::insertReq(const DataType & item)
 {
     return insertReqAux(myRoot, item);
 }
 
 //--------- Definition of SearchReqAux ------------------------------------------
 template <typename DataType>
-void BST<DataType>::insertReqAux(BST<DataType>::BinNodePointer &SubtreeRoot, const DataType& item)
+void ModelBST<DataType>::insertReqAux(ModelBST<DataType>::BinNodePointer &SubtreeRoot, const DataType& item)
 {
     if(SubtreeRoot==0)      //empty tree
-        SubtreeRoot= new BST<DataType>::BinNode(item);
+        SubtreeRoot= new ModelBST<DataType>::BinNode(item);
     // else there is a nonempty tree. insert into:
     else if(item < SubtreeRoot->data)          // search left subtree
         insertReqAux(SubtreeRoot->left, item);
@@ -381,6 +380,6 @@ void BST<DataType>::insertReqAux(BST<DataType>::BinNodePointer &SubtreeRoot, con
         insertReqAux(SubtreeRoot->right, item);
     else
         cerr<<"Item already in the tree\n";
-}*/
+}
 
 #endif /* MyBST_h */

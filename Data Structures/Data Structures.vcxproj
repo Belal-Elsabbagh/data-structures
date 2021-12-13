@@ -142,6 +142,7 @@
     <ClCompile Include="Data Structures.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="DStack.h" />
     <ClInclude Include="DynamicList.h" />
     <ClInclude Include="LLPriorityQueue.h" />

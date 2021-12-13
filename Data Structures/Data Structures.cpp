@@ -78,6 +78,7 @@ void LLPriorityQueueTest()
     q1.enqueue(4, 3);
 
     LLPriorityQueue<int> q2 = q1;
+    
     q2.display(cout);
     cout << endl;
     q2.dequeue();
