@@ -26,8 +26,6 @@
 #include <new>
 using namespace std;
 
-typedef int ElementType;
-
 /*----------------------------------------------------------------------
   IMPORTANT NOTE
 
@@ -40,7 +38,7 @@ typedef int ElementType;
   The main changes will be in constructor, copy constructor,
   assignment operator, and destructor.
   ----------------------------------------------------------------------*/
-
+template<class ElementType>
 class DynamicList
 {
 private:
@@ -138,18 +136,22 @@ public:
 
 }; //--- end of List class
 
-DynamicList::DynamicList(int maxSize) : mySize(0), myCapacity(maxSize)
+template<class ElementType>
+DynamicList<ElementType>::DynamicList(int maxSize) : mySize(0), myCapacity(maxSize)
 {
     myArray = new(nothrow) ElementType[myCapacity];
     assert(myArray != 0);
 }
 
-DynamicList::~DynamicList()
+template<class ElementType>
+DynamicList<ElementType>::~DynamicList()
 {
     delete[] myArray;
 }
 
-DynamicList::DynamicList(const DynamicList& origList) : mySize(origList.mySize), myCapacity(origList.myCapacity)
+template<class ElementType>
+DynamicList<ElementType>::DynamicList(const DynamicList<ElementType>& origList) 
+    : mySize(origList.mySize), myCapacity(origList.myCapacity)
 {
     myArray = new(nothrow) ElementType[origList.myCapacity];
     if (myArray == 0)
@@ -161,7 +163,8 @@ DynamicList::DynamicList(const DynamicList& origList) : mySize(origList.mySize),
         myArray[i] = origList.myArray[i];
 }
 
-const DynamicList& DynamicList::operator=(const DynamicList& rightHandSide)
+template<class ElementType>
+const DynamicList<ElementType>& DynamicList<ElementType>::operator=(const DynamicList<ElementType>& rightHandSide)
 {
     if (this != &rightHandSide)
     {
@@ -187,12 +190,14 @@ const DynamicList& DynamicList::operator=(const DynamicList& rightHandSide)
   Check notes in StaticList.cpp for studying.
   ----------------------------------------------------------------------*/
 
-bool DynamicList::empty() const
+template<class ElementType>
+bool DynamicList<ElementType>::empty() const
 {
     return mySize == 0;
 }
 
-void DynamicList::insert(ElementType item, int pos)
+template<class ElementType>
+void DynamicList<ElementType>::insert(ElementType item, int pos)
 {
     if (pos < 0 || pos > mySize || mySize == myCapacity)
     {
@@ -209,7 +214,8 @@ void DynamicList::insert(ElementType item, int pos)
     }
 }
 
-void DynamicList::erase(int pos)
+template<class ElementType>
+void DynamicList<ElementType>::erase(int pos)
 {
     if (pos < 0 || pos >= mySize || mySize == 0)
         cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
@@ -223,7 +229,8 @@ void DynamicList::erase(int pos)
     }
 }
 
-void DynamicList::reverse()
+template<class ElementType>
+void DynamicList<ElementType>::reverse()
 {
     for (int i = 0; i < mySize / 2; i++)
     {
@@ -233,7 +240,8 @@ void DynamicList::reverse()
     }
 }
 
-const DynamicList DynamicList::operator+(DynamicList rightHandSide)
+template<class ElementType>
+const DynamicList<ElementType> DynamicList<ElementType>::operator+(DynamicList<ElementType> rightHandSide)
 {
     for (int i = mySize; i < mySize + rightHandSide.mySize; i++)
         myArray[i] = rightHandSide.myArray[i];
@@ -241,7 +249,8 @@ const DynamicList DynamicList::operator+(DynamicList rightHandSide)
     return *this;
 }
 
-void DynamicList::display(ostream& out) const
+template<class ElementType>
+void DynamicList<ElementType>::display(ostream& out) const
 {
     out << "\nDisplaying List...\n";
     for (int i = 0; i < mySize; i++)
@@ -250,7 +259,7 @@ void DynamicList::display(ostream& out) const
     }
 }
 
-ostream& operator<<(ostream& out, const DynamicList& aList)
+ostream& operator<<(ostream& out, const DynamicList<ElementType>& aList)
 {
     aList.display(out);
     return out;
