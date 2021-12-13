@@ -9,15 +9,17 @@
 #include "TQueue.h"
 #include "TPriorityQueue.h"
 #include "LLQueue.h"
+#include "LLPriorityQueue.h"
 
 using namespace std;
 
 void LLStackTest();
 void TPriorityQueueTest();
+void LLPriorityQueueTest();
 
 int main()
 {
-    LLStackTest();
+    LLPriorityQueueTest();
 }
 
 void LLStackTest()
@@ -64,6 +66,20 @@ void LLQueueTest()
     LLQueue<int> q2 = q1;
     q2.display(cout);
 
+    q2.dequeue();
+    q2.display(cout);
+}
+
+void LLPriorityQueueTest()
+{
+    LLPriorityQueue<int> q1;
+    q1.enqueue(9, 5);
+    q1.enqueue(8, 1);
+    q1.enqueue(4, 3);
+
+    LLPriorityQueue<int> q2 = q1;
+    q2.display(cout);
+    cout << endl;
     q2.dequeue();
     q2.display(cout);
 }

@@ -139,8 +139,8 @@ void TPriorityQueue<QueueElement>::enqueue(const QueueElement& value)
 	{
 		cout << "vector size: " << myArray.size() << endl;
 
-		typename vector<QueueElement>::iterator iter;
-		for (iter = myArray.end(); iter != iter.begin(); iter--)
+		typename vector<QueueElement>::iterator iter = myArray.end();
+		for (int i = myArray.size(); i > 0; i--)
 		{
 			int x = i - 1;
 

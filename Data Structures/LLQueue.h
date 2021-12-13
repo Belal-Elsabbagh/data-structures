@@ -247,5 +247,3 @@ void LLQueue<QueueElement>::dequeue()
 
 	delete temp;
 }
-
-

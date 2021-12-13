@@ -256,6 +256,8 @@ StackElement LLStack::bottom() const
 		ptr = ptr->next;
 	}
 	return ptr->data;
+
+	temp.~LLStack();
 }
 
 ostream& operator<<(ostream& out, LLStack& list)
