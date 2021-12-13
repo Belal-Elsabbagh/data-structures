@@ -15,8 +15,7 @@
 #include <iostream>
 using namespace std;
 
-typedef int StackElement;
-
+template<class StackElement>
 class LLStack
 {
 private:
@@ -134,12 +133,14 @@ public:
  but with slightly different data member initializations.
  ------------------------------------------------------------------------*/
 
-LLStack::LLStack()
+template<class StackElement>
+LLStack<StackElement>::LLStack()
 {
 	myTop = NULL;
 }
 
-LLStack::LLStack(const LLStack& original)
+template<class StackElement>
+LLStack<StackElement>::LLStack(const LLStack& original)
 {
 	// mySize = origList.mySize;
 	// first = 0;
@@ -164,7 +165,8 @@ LLStack::LLStack(const LLStack& original)
 	}
 }
 
-LLStack::~LLStack()
+template<class StackElement>
+LLStack<StackElement>::~LLStack()
 {
 	NodePointer prev = myTop,
 		ptr;
@@ -176,7 +178,8 @@ LLStack::~LLStack()
 	}
 }
 
-const LLStack& LLStack::operator=(const LLStack& rightSide)
+template<class StackElement>
+const LLStack<StackElement>& LLStack<StackElement>::operator=(const LLStack<StackElement>& rightSide)
 {
 	/*--------------------------------------------------------------------
 	 The assignment operator uses the copy constructor to assign the
@@ -195,12 +198,14 @@ const LLStack& LLStack::operator=(const LLStack& rightSide)
 	return *this;
 }
 
-bool LLStack::empty() const
+template<class StackElement>
+bool LLStack<StackElement>::empty() const
 {
 	return myTop == NULL;
 }
 
-void LLStack::push(const StackElement& value)
+template<class StackElement>
+void LLStack<StackElement>::push(const StackElement& value)
 {
 	NodePointer temp = new Node(value);
 
@@ -208,25 +213,29 @@ void LLStack::push(const StackElement& value)
 	myTop = temp;
 }
 
-void LLStack::display(ostream& out) const
+template<class StackElement>
+void LLStack<StackElement>::display(ostream& out) const
 {
 	for (NodePointer ptr = myTop; ptr != 0; ptr = ptr->next)
 		out << ptr->data << endl;
 }
 
-StackElement LLStack::top() const
+template<class StackElement>
+StackElement LLStack<StackElement>::top() const
 {
 	return myTop->data;
 }
 
-void LLStack::pop()
+template<class StackElement>
+void LLStack<StackElement>::pop()
 {
 	NodePointer ptr = myTop;
 	myTop = myTop->next;
 	delete ptr;
 }
 
-void LLStack::intersection(const LLStack& s1, LLStack& s2)
+template<class StackElement>
+void LLStack<StackElement>::intersection(const LLStack<StackElement>& s1, LLStack<StackElement>& s2)
 {
 	NodePointer ptr1, ptr2;
 	ptr1 = myTop;
@@ -246,7 +255,8 @@ void LLStack::intersection(const LLStack& s1, LLStack& s2)
 	}
 }
 
-StackElement LLStack::bottom() const
+template<class StackElement>
+StackElement LLStack<StackElement>::bottom() const
 {
 	LLStack temp(*this);
 	NodePointer ptr = temp.myTop;
@@ -260,7 +270,7 @@ StackElement LLStack::bottom() const
 	temp.~LLStack();
 }
 
-ostream& operator<<(ostream& out, LLStack& list)
+ostream& operator<<(ostream& out, LLStack<StackElement>& list)
 {
 	list.display(out);
 	return out;
