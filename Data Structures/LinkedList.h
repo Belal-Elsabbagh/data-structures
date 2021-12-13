@@ -9,8 +9,8 @@
 
 #include <iostream>
 using namespace std;
-typedef int ElementType;
 
+template<class ElementType>
 class LinkedList
 {
 private:
@@ -131,12 +131,14 @@ public:
 }; //--- end of List class
 
 //-- Definition of the class constructor
-LinkedList::LinkedList() // uses initialization list to set the first pointer and mySize to 0
+template <class ElementType>
+LinkedList<ElementType>::LinkedList() // uses initialization list to set the first pointer and mySize to 0
 	: first(0), mySize(0)
 {}
 
 //-- Definition of the class copy constructor
-LinkedList::LinkedList(const LinkedList& original)
+template <class ElementType>
+LinkedList<ElementType>::LinkedList(const LinkedList& original)
 	: first(0), mySize(original.mySize)
 {
 	//mySize = origList.mySize;
@@ -162,7 +164,8 @@ LinkedList::LinkedList(const LinkedList& original)
 }
 
 //-- Definition of the class destructor
-LinkedList::~LinkedList()
+template <class ElementType>
+LinkedList<ElementType>::~LinkedList()
 {
 	NodePointer prev = first,
 		ptr;
@@ -174,7 +177,8 @@ LinkedList::~LinkedList()
 	}
 }
 
-const LinkedList& LinkedList::operator=(const LinkedList& rightSide)
+template <class ElementType>
+const LinkedList<ElementType>& LinkedList<ElementType>::operator=(const LinkedList& rightSide)
 {
 	/*--------------------------------------------------------------------
 	 The assignment operator uses the copy constructor to assign the
@@ -194,13 +198,15 @@ const LinkedList& LinkedList::operator=(const LinkedList& rightSide)
 }
 
 //-- Definition of empty()
-bool LinkedList::empty()
+template <class ElementType>
+bool LinkedList<ElementType>::empty()
 {
 	return mySize == 0; // returns true if mySize = 0 and false otherwise.
 }
 
 //-- Definition of insert()
-void LinkedList::insert(ElementType dataVal, int index)
+template <class ElementType>
+void LinkedList<ElementType>::insert(ElementType dataVal, int index)
 {
 	if (index < 0 || index > mySize) // checks invalidity of index.
 	{
@@ -232,7 +238,8 @@ void LinkedList::insert(ElementType dataVal, int index)
 }
 
 //-- Definition of erase()
-void LinkedList::erase(int index)
+template <class ElementType>
+void LinkedList<ElementType>::erase(int index)
 {
 	if (index < 0 || index > mySize) // checks invalidity of index.
 	{
@@ -264,7 +271,8 @@ void LinkedList::erase(int index)
 	}
 }
 
-void LinkedList::display(ostream& out) const
+template <class ElementType>
+void LinkedList<ElementType>::display(ostream& out) const
 {
 	NodePointer ptr = first;
 	while (ptr != 0)
@@ -274,13 +282,15 @@ void LinkedList::display(ostream& out) const
 	}
 }
 
-int LinkedList::nodeCount()
+template <class ElementType>
+int LinkedList<ElementType>::nodeCount()
 {
 	// you can do a manual count if you want but that's much easier
 	return mySize;
 }
 
-void LinkedList::reverse()
+template <class ElementType>
+void LinkedList<ElementType>::reverse()
 {
 	NodePointer prevP = 0,
 		currentP = first,
@@ -296,7 +306,8 @@ void LinkedList::reverse()
 	first = prevP; // new head of (reversed) LinkedList
 }
 
-bool LinkedList::ascendingOrder()
+template <class ElementType>
+bool LinkedList<ElementType>::ascendingOrder()
 {
 	if (mySize <= 1)
 		// empty or one element list
@@ -313,7 +324,7 @@ bool LinkedList::ascendingOrder()
 	return true;
 }
 
-int LinkedList::search(ElementType dataVal)
+int LinkedList<ElementType>::search(ElementType dataVal)
 {
 	int loc;
 	NodePointer tempP = first;
@@ -327,7 +338,8 @@ int LinkedList::search(ElementType dataVal)
 	return -1;
 }
 
-void LinkedList::insertUsingInputOperator(istream& in)
+template <class ElementType>
+void LinkedList<ElementType>::insertUsingInputOperator(istream& in)
 {
 	int numOfElements;
 	in >> numOfElements;
@@ -340,13 +352,13 @@ void LinkedList::insertUsingInputOperator(istream& in)
 	}
 }
 
-ostream& operator<<(ostream& out, const LinkedList& aList)
+ostream& operator<<(ostream& out, const LinkedList<ElementType>& aList)
 {
 	aList.display(out);
 	return out;
 }
 
-istream& operator>>(istream& in, LinkedList& aList)
+istream& operator>>(istream& in, LinkedList<ElementType>& aList)
 {
 	aList.insertUsingInputOperator(in);
 	return in;

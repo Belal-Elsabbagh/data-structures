@@ -145,6 +145,7 @@
     <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="DStack.h" />
     <ClInclude Include="DynamicList.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="LLPriorityQueue.h" />
     <ClInclude Include="TPriorityQueue.h" />
     <ClInclude Include="TQueue.h" />

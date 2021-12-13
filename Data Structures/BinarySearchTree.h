@@ -157,7 +157,7 @@ private:
      Postcondition: Graphical representation of subtree with root pointed
      to by subtreePtr has been output to out, indented indent spaces.
      ------------------------------------------------------------------------*/
-    //-----------------------Search & Insert functions recursively-----------------------
+    //------------------Search & Insert functions recursively------------------
     inline bool SearchReq(const DataType& item) const;
     bool SearchReqAux(BinNodePointer SubtreeRoot, const DataType& item)const;
     
