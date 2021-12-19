@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Trees">
       <UniqueIdentifier>{08995624-3162-49d1-b8b2-334bf66b8087}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Hash Tables">
+      <UniqueIdentifier>{76e66d99-780d-4b66-a03f-2f590285fe2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data Structures.cpp">
@@ -32,12 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LinkedList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HashTable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TQueue.h">
       <Filter>Header Files\Queue</Filter>
     </ClInclude>
@@ -64,6 +61,15 @@
     </ClInclude>
     <ClInclude Include="BinarySearchTree.h">
       <Filter>Header Files\Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>Header Files\Hash Tables</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HTableChainning.h">
+      <Filter>Header Files\Hash Tables</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
