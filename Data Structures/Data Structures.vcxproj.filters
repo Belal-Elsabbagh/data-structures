@@ -71,5 +71,8 @@
     <ClInclude Include="HTableChainning.h">
       <Filter>Header Files\Hash Tables</Filter>
     </ClInclude>
+    <ClInclude Include="Sorting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
