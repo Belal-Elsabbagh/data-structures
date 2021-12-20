@@ -22,12 +22,15 @@ const int DoubleHashVal = 7;
 class HTable
 {
 private:
-    class Node {
+    class Node 
+    {
     public:
         int key;
         string ID; // Student ID
         string value; // Student name
-        Node(int K = -1, string id = "", string val = "") {
+        
+        Node(int K = -1, string id = "", string val = "") 
+        {
             key = K; ID = id; value = val;
         }
     };
@@ -64,129 +67,154 @@ ostream& operator<< (ostream& out, HTable aHash);
 HTable::HTable()
 {
     numberOfElements = 0;
-    for (int i = 0; i < TableSize; i++) {
+
+    // initialize the table with default values
+    for (int i = 0; i < TableSize; i++) 
+    {
         table[i].key = -1;
         table[i].ID = "";
         table[i].value = "";
     }
 }
+
 //------------------------ Hash function ----------------------------------------
 int HTable::hash(string ID)
 {
+    /*---------------------------------------------------
+     Takes the sum of ascii codes of characters in ID
+     and returns its remainder when divided by TableSize
+     ---------------------------------------------------*/ 
+
     int sum = 0;
     for (int i = 0; i < ID.length(); i++)
         sum += ID[i];
     return sum % TableSize;
 }
+
 //----------------- insert Linear probing ---------------------------------------
 void HTable::insertLinear(string studentID, string studentName)
 {
-    int index = hash(studentID);
+    int index = hash(studentID); // saves the index specified by the hash
     int loc;
-    Node n(index, studentID, studentName);
+    Node newNode(index, studentID, studentName); // creates a new node with the index as key
 
-    if (table[index].ID == studentID) {
-        cout << "Student with ID: " << studentID << " and name: " << studentName << " already exists." << endl;
+    if (table[index].ID == studentID) // checks if the index already contains the ID
+    {
+        cout << "Student with ID: " << studentID 
+             << " and name: " << studentName 
+             << " already exists." << endl;
         return;
     }
 
-    if (table[index].key == -1 || table[index].key == -2) { // No collision
-        table[index] = n;
-        numberOfElements++;
-    }
-    else { // Collision
-        for (int i = 1; i < TableSize; i++) {
-            loc = (i + index) % TableSize;
-            if (table[loc].ID == studentID) {
-                cout << "Student with ID: " << studentID << " and name: " << studentName << " already exists." << endl;
+    if (!(table[index].key == -1) && !(table[index].key == -2)) // checks if there's collision
+    {
+        for (int i = 1; i < TableSize; i++) // iterates over the table
+        {
+            loc = (i + index) % TableSize; // initializes the new index by linear probing
+            
+            if (table[loc].ID == studentID) // checks if the index already contains the ID
+            {
+                cout << "Student with ID: " << studentID
+                     << " and name: " << studentName
+                     << " already exists." << endl;
                 return;
             }
-            if (table[loc].key == -1 || table[loc].key == -2) { // No collision
-                table[loc] = n;
-                n.key = loc;
+
+            if (table[loc].key == -1 || table[loc].key == -2) //add node in loc in the case of no collision
+            {
+                table[loc] = newNode;
+                newNode.key = loc;
                 numberOfElements++;
                 return;
             }
         }
     }
+
+    // adds the node to the table in the case of no collision
+    table[index] = newNode;
+    numberOfElements++;
 }
+
 //----------------- remove Linear probing ---------------------------------------
-void HTable::removeLinear(string studentID) {
-    int index = hash(studentID);
+void HTable::removeLinear(string studentID) 
+{
+    int index = hash(studentID); //get index in table by ID
     int loc;
-    if (table[index].ID == studentID) {
-        table[index].key = -2;
-        table[index].ID = "";
-        table[index].value = "";
-        numberOfElements--;
+    
+    if (table[index].ID == studentID) // checks if the ID exists
+    {
+        table[index].key = -2; // marks as deleted
+        table[index].ID = ""; // empties data
+        table[index].value = ""; // emptied data
+        numberOfElements--; // decrement the number of elements
         return;
     }
-    else {
-        for (int i = 1; i < TableSize; i++) {
-            loc = (i + index) % TableSize;
-            if (table[loc].key == -1) {
-                cout << "Student with ID: " << studentID << " NOT exists." << endl;
-                return;
-            }
-            if (table[loc].ID == studentID) {
-                table[loc].key = -2;
-                table[loc].ID = "";
-                table[loc].value = "";
-                numberOfElements--;
-                return;
-            }
+
+    for (int i = 1; i < TableSize; i++) // iterates over table
+    {
+        loc = (i + index) % TableSize; // initializes the new index by linear probing
+
+        if (table[loc].key == -1) // if an empty node is encountered
+        {
+            cout << "Student with ID: " << studentID << " NOT exists." << endl;
+            return;
+        }
+        if (table[loc].ID == studentID) // if the required node is encountered
+        {
+            table[loc].key = -2; // mark as deleted
+            table[loc].ID = ""; // empty data
+            table[loc].value = ""; // empty data
+            numberOfElements--; // decrement number of elements
+            return;
         }
     }
 }
+
 //----------------- search Linear probing ---------------------------------------
-int HTable::searchLinear(string studentID) {
+int HTable::searchLinear(string studentID) 
+{
     int index = hash(studentID);
     int loc;
-    if (table[index].ID == studentID) {
+    if (table[index].ID == studentID) 
+    {
         cout << "Student with ID: " << studentID << " exists." << endl;
         cout << setw(2) << index << ": " << setw(2) << table[index].key
-            << ": " << setw(3) << table[index].ID << ": " << setw(10) << table[index].value << endl;
+             << ": " << setw(3) << table[index].ID << ": " << setw(10) << table[index].value << endl;
         return index;
     }
-    else {
-        for (int i = 1; i < TableSize; i++) {
-            loc = (i + index) % TableSize;
-            if (table[loc].key == -1) {
-                cout << "Student with ID: " << studentID << " NOT exists." << endl;
-                return -1;
-            }
-            if (table[loc].ID == studentID) {
-                cout << "Student with ID: " << studentID << " exists." << endl;
-                cout << setw(2) << loc << ": " << setw(2) << table[loc].key
-                    << ": " << setw(3) << table[loc].ID << ": " << setw(10) << table[loc].value << endl;
-                return loc;
-            }
+
+    for (int i = 1; i < TableSize; i++) // iterate over table
+    {
+        loc = (i + index) % TableSize;
+        if (table[loc].key == -1) // if an empty node was found
+        {
+            cout << "Student with ID: " << studentID << "does NOT exists." << endl;
+            return -1; // indicates that this ID does not found
+        }
+        if (table[loc].ID == studentID) // found ID
+        {
+            cout << "Student with ID: " << studentID << " exists." << endl;
+            
+            // display the Node data
+            cout << setw(2) << loc << ": " << setw(2) << table[loc].key
+                 << ": " << setw(3) << table[loc].ID << ": " << setw(10) << table[loc].value << endl;
+            return loc; // return index
         }
     }
     return -1;
 }
-//------------------- Display Hash Table ------------------------------------
-void HTable::display(ostream& out) {
-    for (int i = 0; i < TableSize; i++) {
-        if (table[i].key == -1 || table[i].key == -2)
-            continue;
-        out << setw(2) << i << ": " << setw(2) << table[i].key << ": " << setw(3) << table[i].ID << ": "
-            << setw(10) << table[i].value << endl;
-    }
-}
-//--------------- Overloading output << operator --------------------------------
-ostream& operator<< (ostream& out, HTable aHash) {
-    aHash.display(out);
-    return out;
-}
+
 //------------------- Get Quadratic Location ------------------------------------
-int GetQuadLoc(int Ndx, int& Sign) {
+int GetQuadLoc(int Ndx, int& Sign) 
+{
     int loc;
-    if (Sign > 0) {
+    if (Sign > 0) 
+    {
         loc = (Ndx + (Sign * Sign)) % TableSize;
         Sign = Sign * -1;
     }
-    else {
+    else 
+    {
         Sign = Sign * -1;
         loc = (Ndx - (Sign * Sign));
         Sign++;
@@ -398,6 +426,22 @@ int HTable::searchDouble(string studentID) {
         cout << "Item doesn't exists" << endl;
         return -1;
     }
+}
+
+//------------------- Display Hash Table ------------------------------------
+void HTable::display(ostream& out) {
+    for (int i = 0; i < TableSize; i++) {
+        if (table[i].key == -1 || table[i].key == -2)
+            continue;
+        out << setw(2) << i << ": " << setw(2) << table[i].key << ": " << setw(3) << table[i].ID << ": "
+            << setw(10) << table[i].value << endl;
+    }
+}
+
+//--------------- Overloading output << operator --------------------------------
+ostream& operator<< (ostream& out, HTable aHash) {
+    aHash.display(out);
+    return out;
 }
 
 #endif /* HashTable_h */
