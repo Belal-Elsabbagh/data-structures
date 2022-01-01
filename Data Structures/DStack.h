@@ -11,6 +11,7 @@
  Note: Execution terminates if memory isn't available for a stack element.
  --------------------------------------------------------------------------*/
 #include <iostream>
+#include <algorithm>
 #include <cassert>
 #include <new>
 using namespace std;
@@ -116,8 +117,7 @@ DStack::DStack(const DStack& original)
 		exit(1);
 	}
 	myTop = original.myTop;
-	for (int i = 0; i < myCapacity; i++)
-		myArray[i] = original.myArray[i];
+	std::copy(myArray, original);
 }
 
 const DStack& DStack::operator=(const DStack& rightHandSide)

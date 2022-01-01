@@ -1,7 +1,9 @@
 #pragma once
+#include <iostream>
 
 class Sorting
 {
+public:
 	void BubbleSort(int* arr, int size);
     /*-----------------------------------------------------------------------
      Bubble Sort
@@ -25,15 +27,36 @@ class Sorting
     /*-----------------------------------------------------------------------
      Insertion Sort
 
-
+     Insertion sort is a simple sorting algorithm that works similar to the 
+     way you sort playing cards in your hands. The array is virtually split 
+     into a sorted and an unsorted part. Values from the unsorted part are 
+     picked and placed at the correct position in the sorted part.
      -----------------------------------------------------------------------*/
 
+    void quickSort(int* arr, int left, int right);
+    /*-----------------------------------------------------------------------
+     QuickSort
+
+     1. Choose an element to be the pivot
+     2. Arrange the list so that all the smaller elements are on its left
+        and all the greater elements are on its right.
+     3. Divide the (sub)-list into two smaller sub-lists.
+     4. Each list is then sorted in the same way
+     -----------------------------------------------------------------------*/
+    
+    void MergeSort(int* arrayA, int* arrayB, int low, int high);
+
+private:
     void swap(int* xp, int* yp)
     {
         int temp = *xp;
         *xp = *yp;
         *yp = temp;
     }
+
+    int partition(int* arr, int low, int high);
+
+    void merge(int* arrayA, int* arrayB, int low, int mid, int high);
 };
 
 void Sorting::BubbleSort(int* arr, int size)
@@ -94,4 +117,54 @@ void Sorting::InsertionSort(int* arr, int size)
         }
         arr[j + 1] = key;
     }
+}
+
+/***** QuickSort Algorthim *****/
+int Sorting::partition(int* arr, int low, int high)
+{
+    int pivot = arr[high];    // pivot
+    int i = (low - 1);  // Index of smaller element
+
+    for (int j = low; j <= high - 1; j++)
+    {
+        // If current element is smaller than or
+        // equal to pivot
+        if (arr[j] <= pivot)
+        {
+            i++;    // increment index of smaller element
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+void Sorting::quickSort(int* arr, int left, int right)
+{
+    if (right < left)
+        return;
+
+    /* pi is partitioning index, arr[p] is now
+       at right place */
+    int pi = partition(arr, left, right);
+    
+    /* Separately sort elements before
+       partition and after partition */
+    quickSort(arr, left, pi - 1);
+    quickSort(arr, pi + 1, right);
+
+}//-- End of QuickSort Algorithm
+
+void Sorting::MergeSort(int* arrayA, int* arrayB, int low, int high)
+{
+    int mid;
+    if (high < low)
+        return;
+
+}
+
+void Sorting::merge(int* arrayA, int* arrayB, int low, int mid, int high)
+{
+    int h, i, j, k;
+
 }

@@ -15,7 +15,7 @@
  -------------------------------------------------------------------------*/
 
 #include <iostream>
-using namespace std;
+using std::ostream;
 #ifndef STATICLIST
 #define STATICLIST
 
@@ -29,7 +29,7 @@ class StaticList
 private:
     /******** Data Members ********/
     int mySize;                     // current size of list stored in myArray
-    ElementType myArray[CAPACITY];  // array to store list elements
+    std::array<ElementType> myArray(CAPACITY);  // array to store list elements
 
 
 public:
@@ -108,7 +108,7 @@ public:
     void leftRotation(int numOfRotations);
     void removeDuplicates();
     void deleteByValue(ElementType item);
-	ostream& operator<<(ostream& out);
+	std::ostream& operator<<(std::ostream& out);
 
 }; //--- end of List class
 
