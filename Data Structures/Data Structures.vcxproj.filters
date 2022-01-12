@@ -59,7 +59,7 @@
     <ClInclude Include="StaticList.h">
       <Filter>Header Files\List</Filter>
     </ClInclude>
-    <ClInclude Include="BinarySearchTree.h">
+    <ClInclude Include="ModelBinarySearchTree.h">
       <Filter>Header Files\Trees</Filter>
     </ClInclude>
     <ClInclude Include="ModelHashTable.h">
