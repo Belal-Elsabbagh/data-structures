@@ -224,17 +224,17 @@ void LinkedList<ElementType>::insert(ElementType dataVal, int index)
 	{
 		newPtr->next = first;
 		first = newPtr;
+		return;
 	}
-	else
-	{
-		// traverse to node before required index
-		for (int i = 1; i < index; i++)
-			predPtr = predPtr->next;
 
-		newPtr->next = predPtr->next; // sets new node to point to the next node of its previous node
+	// traverse to node before required index
+	for (int i = 1; i < index; i++)
+		predPtr = predPtr->next;
 
-		predPtr->next = newPtr; // sets previous node to point to the new node
-	}
+	newPtr->next = predPtr->next; // sets new node to point to the next node of its previous node
+
+	predPtr->next = newPtr; // sets previous node to point to the new node
+
 }
 
 //-- Definition of erase()
@@ -258,17 +258,16 @@ void LinkedList<ElementType>::erase(int index)
 		ptr = first; // holds the first node (node to be erased)
 		first = ptr->next; // sets first node to point to the node next to first
 		delete ptr; // deletes node
+		return;
 	}
-	else
-	{
-		// traverse to node before required index
-		for (int i = 1; i < index; i++)
-			predPtr = predPtr->next;
 
-		ptr = predPtr->next; // holds node to be erased
-		predPtr->next = ptr->next; // sets previous node to skip the node to be erased
-		delete ptr; // erases node
-	}
+	// traverse to node before required index
+	for (int i = 1; i < index; i++)
+		predPtr = predPtr->next;
+
+	ptr = predPtr->next; // holds node to be erased
+	predPtr->next = ptr->next; // sets previous node to skip the node to be erased
+	delete ptr; // erases node
 }
 
 template <class ElementType>
@@ -332,8 +331,7 @@ int LinkedList<ElementType>::search(ElementType dataVal)
 	{
 		if (tempP->data == dataVal)
 			return loc;
-		else
-			tempP = tempP->next;
+		tempP = tempP->next;
 	}
 	return -1;
 }

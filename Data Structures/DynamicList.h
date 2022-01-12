@@ -204,31 +204,31 @@ void DynamicList<ElementType>::insert(ElementType item, int pos)
     if (pos < 0 || pos > mySize || mySize == myCapacity)
     {
         cout << "Invalid Insertion. Operation Terminated with no change.\n\a";
+        return;
     }
-    else
+
+    for (int i = mySize; i > pos; i--)
     {
-        for (int i = mySize; i > pos; i--)
-        {
-            myArray[i] = myArray[i - 1];
-        }
-        myArray[pos] = item;
-        mySize++;
+        myArray[i] = myArray[i - 1];
     }
+    myArray[pos] = item;
+    mySize++;
 }
 
 template<class ElementType>
 void DynamicList<ElementType>::erase(int pos)
 {
     if (pos < 0 || pos >= mySize || mySize == 0)
-        cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
-    else
     {
-        for (int i = pos; i < mySize; i++)
-        {
-            myArray[i] = myArray[i + 1];
-        }
-        mySize--;
+        cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
+        return;
     }
+
+    for (int i = pos; i < mySize; i++)
+    {
+        myArray[i] = myArray[i + 1];
+    }
+    mySize--;
 }
 
 template<class ElementType>

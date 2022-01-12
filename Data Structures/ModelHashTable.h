@@ -238,10 +238,13 @@ void ModelHashTable::insertQuadratic(string studentID, string studentName)
         table[index] = n;
         numberOfElements++;
     }
-    else { // Collision
-        while (true) {
+    else 
+    { // Collision
+        while (true) 
+        {
             loc = GetQuadLoc(index, i);
-            if (table[loc].ID == studentID) {
+            if (table[loc].ID == studentID) 
+            {
                 cout << "Student with ID: " << studentID << " and name: " << studentName << " already exists." << endl;
                 return;
             }

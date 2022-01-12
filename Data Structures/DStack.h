@@ -14,7 +14,6 @@
 #include <algorithm>
 #include <cassert>
 #include <new>
-using namespace std;
 
 typedef int StackElement;
 
@@ -113,7 +112,7 @@ DStack::DStack(const DStack& original) : myCapacity(original.myCapacity)
 	myArray = new(nothrow) StackElement[original.myCapacity];
 	if (myArray == 0)
 	{
-		cerr << "\nCouldn't allocate memory. Exiting...\n\a";
+		std::cerr << "\nCouldn't allocate memory. Exiting...\n\a";
 		exit(1);
 	}
 	myTop = original.myTop;
@@ -156,7 +155,7 @@ void DStack::push(const StackElement value)
 {
 	if (myTop == myCapacity - 1)
 	{
-		cerr << "\nStack Overflow. Exiting...\n\a";
+		std::cerr << "\nStack Overflow. Exiting...\n\a";
 		return;
 	}
 	myTop++;
@@ -180,7 +179,7 @@ StackElement DStack::top() const
 void DStack::pop()
 {
 	if (myTop <= -1)
-		cerr << "Stack Underflow" << endl;
+		std::cerr << "Stack Underflow" << endl;
 	else
 		myTop--;
 }

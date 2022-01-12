@@ -157,33 +157,33 @@ void StaticList<ElementType>::insert(ElementType item, int pos)
 		std::cerr << "Invalid Insertion. Operation Terminated with no change.\n\a";
 		return;
 	}
-	else // after validating size and index...
-	{
-		// shift elements to the right
-		for (int i = mySize; i > pos; i--)
-		{
-			myArray[i] = myArray[i - 1];
-		}
 
-		myArray[pos] = item; // insert element
-		mySize++; // increase size by 1
+	// after validating size and index...
+	// shift elements to the right
+	for (int i = mySize; i > pos; i--)
+	{
+		myArray[i] = myArray[i - 1];
 	}
+
+	myArray[pos] = item; // insert element
+	mySize++; // increase size by 1
 }
 
 template<class ElementType>
 void StaticList<ElementType>::erase(int pos)
 {
-	if (pos < 0 || pos >= mySize || mySize == 0)
-		std::cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
-	else
-	{
-		// shift elements to the left & overwrite the element to be erased
-		for (int i = pos; i < mySize; i++)
-		{
-			myArray[i] = myArray[i + 1];
-		}
-		mySize--;
-	}
+    if (pos < 0 || pos >= mySize || mySize == 0)
+    {
+        std::cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
+        return;
+    }
+
+    // shift elements to the left & overwrite the element to be erased
+    for (int i = pos; i < mySize; i++)
+    {
+        myArray[i] = myArray[i + 1];
+    }
+    mySize--;
 }
 
 template<class ElementType>

@@ -1,7 +1,6 @@
 #pragma once
 #include<iostream>
 #include<vector>
-using namespace std;
 
 template<class QueueElement>
 class TPriorityQueue
@@ -100,7 +99,9 @@ private:
 	// Therefore, you need to remove the LinkedList used and replace it with this Vector that you'll create
 	//Hint: use #include <vector> at the begining of the file
 
-	vector<QueueElement> myArray;
+	auto getInsertIndex() const;
+
+	std::vector<QueueElement> myArray;
 };
 
 /*-----------------------------------------------------------------------
@@ -134,24 +135,12 @@ template<class QueueElement>
 void TPriorityQueue<QueueElement>::enqueue(const QueueElement& value)
 {
 	if (empty())
-		myArray.insert(myArray.begin(), value);
-	else
 	{
-		cout << "vector size: " << myArray.size() << endl;
-
-		typename vector<QueueElement>::iterator iter = myArray.end();
-		for (int i = myArray.size(); i > 0; i--)
-		{
-			int x = i - 1;
-
-			if (value < myArray[x])
-				break;
-			else
-				iter = prev(iter);
-		}
-
-		myArray.insert(iter, value);
+		myArray.insert(myArray.begin(), value);
+		return;
 	}
+	std::cout << "vector size: " << myArray.size() << endl;
+	myArray.insert(getInsertIndex(), value);
 }
 
 template<class QueueElement>
@@ -173,4 +162,19 @@ template<class QueueElement>
 void TPriorityQueue<QueueElement>::dequeue()
 {
 	myArray.erase(myArray.end());
+}
+
+template<class QueueElement>
+auto TPriorityQueue<QueueElement>::getInsertIndex() const
+{
+	std::vector<QueueElement>::iterator iter = myArray.end();
+	for (int i = myArray.size(); i > 0; i--)
+	{
+		int x = i - 1;
+
+		if (value < myArray[x])
+			break;
+		iter = prev(iter);
+	}
+	return iter;
 }

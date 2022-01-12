@@ -247,9 +247,9 @@ void LLStack<StackElement>::intersection(const LLStack<StackElement>& s1, LLStac
 			if (ptr1->data == ptr2->data)
 			{
 				s2.push(ptr2->data);
+				break;
 			}
-			else
-				ptr2 = ptr2->next;
+			ptr2 = ptr2->next;
 		}
 		ptr1 = ptr1->next;
 	}
