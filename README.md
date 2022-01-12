@@ -17,3 +17,7 @@ A repository containing the data structures we use in our DSA course
   * LLPriorityQueue (linked list)
 * ### Tree
   * Binary Search Tree (linked nodes) 
+* ### Hash Table
+  * HashTable
+  * HashTableChaining
+* ### Sorting Algorithms
