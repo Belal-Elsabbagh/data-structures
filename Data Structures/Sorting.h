@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <list>
 
 class Sorting
 {
@@ -45,6 +46,7 @@ public:
      -----------------------------------------------------------------------*/
     
     void MergeSort(int* arrayA, int* arrayB, int low, int high);
+    void radixSort(std::list<int>& x, int numDigits = -1, int base = 10);
 
 private:
     void swap(int* xp, int* yp)
@@ -161,6 +163,38 @@ void Sorting::MergeSort(int* arrayA, int* arrayB, int low, int high)
     if (high < low)
         return;
 
+}
+
+void Sorting::radixSort(std::list<int>& x, int numDigits, int base)
+{
+    std::list<int>* bucket = new std::list<int>[base];
+    int basePower = 1;
+    int value;
+
+    for (int i = 0; i < numDigits; i++)
+    {
+        while (!x.empty())
+        {
+            value = x.front();
+            for (int digit = 0; digit < base; i++)
+            {
+                if (value % (10 ^ i) == digit)
+                {
+                    bucket[digit].push_back(value);
+                }
+                x.pop_front();
+            }
+        }
+
+        for (int i = 0; i < base; i++)
+        {
+            while (!bucket[i].empty())
+            {
+                x.push_back(bucket[i].front());
+                bucket[i].pop_front();
+            }
+        }
+    }
 }
 
 void Sorting::merge(int* arrayA, int* arrayB, int low, int mid, int high)

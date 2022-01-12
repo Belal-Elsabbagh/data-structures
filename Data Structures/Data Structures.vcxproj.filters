@@ -62,7 +62,7 @@
     <ClInclude Include="BinarySearchTree.h">
       <Filter>Header Files\Trees</Filter>
     </ClInclude>
-    <ClInclude Include="HashTable.h">
+    <ClInclude Include="ModelHashTable.h">
       <Filter>Header Files\Hash Tables</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList.h">
@@ -73,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="Sorting.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyHashTable.h">
+      <Filter>Header Files\Hash Tables</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

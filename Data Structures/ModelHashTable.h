@@ -19,7 +19,7 @@ using namespace std;
 
 const int TableSize = 11;
 const int DoubleHashVal = 7;
-class HTable
+class ModelHashTable
 {
 private:
     class Node 
@@ -42,7 +42,7 @@ private:
     int GetDubLoc(string ID, int Val, int Cnt);
 
 public:
-    HTable();
+    ModelHashTable();
     // Linear Probing
     void insertLinear(string studentID, string studentName);
     void removeLinear(string studentID);
@@ -62,9 +62,9 @@ public:
 
 
 };
-ostream& operator<< (ostream& out, HTable aHash);
+ostream& operator<< (ostream& out, ModelHashTable aHash);
 
-HTable::HTable()
+ModelHashTable::ModelHashTable()
 {
     numberOfElements = 0;
 
@@ -78,7 +78,7 @@ HTable::HTable()
 }
 
 //------------------------ Hash function ----------------------------------------
-int HTable::hash(string ID)
+int ModelHashTable::hash(string ID)
 {
     /*---------------------------------------------------
      Takes the sum of ascii codes of characters in ID
@@ -92,7 +92,7 @@ int HTable::hash(string ID)
 }
 
 //----------------- insert Linear probing ---------------------------------------
-void HTable::insertLinear(string studentID, string studentName)
+void ModelHashTable::insertLinear(string studentID, string studentName)
 {
     int index = hash(studentID); // saves the index specified by the hash
     int loc;
@@ -136,7 +136,7 @@ void HTable::insertLinear(string studentID, string studentName)
 }
 
 //----------------- remove Linear probing ---------------------------------------
-void HTable::removeLinear(string studentID) 
+void ModelHashTable::removeLinear(string studentID) 
 {
     int index = hash(studentID); //get index in table by ID
     int loc;
@@ -171,7 +171,7 @@ void HTable::removeLinear(string studentID)
 }
 
 //----------------- search Linear probing ---------------------------------------
-int HTable::searchLinear(string studentID) 
+int ModelHashTable::searchLinear(string studentID) 
 {
     int index = hash(studentID);
     int loc;
@@ -212,20 +212,18 @@ int GetQuadLoc(int Ndx, int& Sign)
     {
         loc = (Ndx + (Sign * Sign)) % TableSize;
         Sign = Sign * -1;
+        return loc;
     }
-    else 
-    {
-        Sign = Sign * -1;
-        loc = (Ndx - (Sign * Sign));
-        Sign++;
-        if (loc < 0)
-            loc = TableSize - loc;
-    }
+    Sign = Sign * -1;
+    loc = (Ndx - (Sign * Sign));
+    Sign++;
+    if (loc < 0)
+        loc = TableSize - loc;
     return loc;
 }
 
 //----------------- insert Quadratic probing ------------------------------------
-void HTable::insertQuadratic(string studentID, string studentName)
+void ModelHashTable::insertQuadratic(string studentID, string studentName)
 {
     int index = hash(studentID);
     int loc, i = 1;
@@ -262,7 +260,7 @@ void HTable::insertQuadratic(string studentID, string studentName)
 }
 
 //----------------- remove Quadratic probing ------------------------------------
-void HTable::removeQuadratic(string studentID) {
+void ModelHashTable::removeQuadratic(string studentID) {
     int index = hash(studentID);
     int loc, i = 1;
     if (table[index].ID == studentID) {
@@ -291,7 +289,7 @@ void HTable::removeQuadratic(string studentID) {
 }
 
 //------------ search Quadratic probing ------------------------------------
-int HTable::searchQuadratic(string studentID) {
+int ModelHashTable::searchQuadratic(string studentID) {
     int index = hash(studentID);
     int loc, i = 0;
     if (table[index].ID == studentID) {
@@ -333,7 +331,7 @@ int GetDubLoc(string ID, int Val, int Cnt) {
     return((h1 + (Cnt * h2)) % TableSize);
 }
 //----------------- insert Double Hashing ------------------------------------
-void HTable::insertDouble(string studentID, string studentName)
+void ModelHashTable::insertDouble(string studentID, string studentName)
 {
     int index = hash(studentID);
     int loc;
@@ -367,7 +365,7 @@ void HTable::insertDouble(string studentID, string studentName)
     }
 }
 //----------------- remove Double probing ------------------------------------
-void HTable::removeDouble(string studentID) {
+void ModelHashTable::removeDouble(string studentID) {
     int index = hash(studentID);
     int loc;
     if (table[index].ID == studentID) {
@@ -396,7 +394,7 @@ void HTable::removeDouble(string studentID) {
 }
 
 //------------ search Double probing ------------------------------------
-int HTable::searchDouble(string studentID) {
+int ModelHashTable::searchDouble(string studentID) {
     int index = hash(studentID);
     int loc;
     if (table[index].ID == studentID) {
@@ -429,7 +427,7 @@ int HTable::searchDouble(string studentID) {
 }
 
 //------------------- Display Hash Table ------------------------------------
-void HTable::display(ostream& out) {
+void ModelHashTable::display(ostream& out) {
     for (int i = 0; i < TableSize; i++) {
         if (table[i].key == -1 || table[i].key == -2)
             continue;
@@ -439,7 +437,7 @@ void HTable::display(ostream& out) {
 }
 
 //--------------- Overloading output << operator --------------------------------
-ostream& operator<< (ostream& out, HTable aHash) {
+ostream& operator<< (ostream& out, ModelHashTable aHash) {
     aHash.display(out);
     return out;
 }

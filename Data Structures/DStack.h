@@ -117,7 +117,7 @@ DStack::DStack(const DStack& original)
 		exit(1);
 	}
 	myTop = original.myTop;
-	std::copy(myArray, original);
+	//TODO create copy algorithm
 }
 
 const DStack& DStack::operator=(const DStack& rightHandSide)

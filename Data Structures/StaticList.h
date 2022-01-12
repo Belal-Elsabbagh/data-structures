@@ -29,7 +29,7 @@ class StaticList
 private:
     /******** Data Members ********/
     int mySize;                     // current size of list stored in myArray
-    std::array<ElementType> myArray(CAPACITY);  // array to store list elements
+    std::array<ElementType,CAPACITY> myArray;  // array to store list elements
 
 
 public:

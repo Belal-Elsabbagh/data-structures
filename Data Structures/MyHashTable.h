@@ -72,6 +72,20 @@ int MyHashTable::hash(string ID)
 	return sum % TableSize;
 }
 
+int MyHashTable::GetQuadLoc(int Ndx, int& Sign)
+{
+	int index;
+
+	if (Sign < 0)
+	{
+		Sign = Sign * -1;
+		index = (Ndx - (Sign * Sign));
+		Sign++;
+		if (index < 0)
+			index = TableSize - index;
+	}
+}
+
 int MyHashTable::GetDubLoc(string ID, int Val = DoubleHashVal, int Cnt = 0)
 {
 	return hash(ID) % Val;
