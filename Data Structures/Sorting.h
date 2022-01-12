@@ -162,7 +162,6 @@ void Sorting::MergeSort(int* arrayA, int* arrayB, int low, int high)
     int mid;
     if (high < low)
         return;
-
 }
 
 void Sorting::radixSort(std::list<int>& x, int numDigits, int base)

@@ -15,6 +15,7 @@
  -------------------------------------------------------------------------*/
 
 #include <iostream>
+#include <array>
 using std::ostream;
 #ifndef STATICLIST
 #define STATICLIST
@@ -148,12 +149,12 @@ void StaticList<ElementType>::insert(ElementType item, int pos)
 {
 	if (mySize == CAPACITY)
 	{
-		cerr << "No space to insert.\n\a";
+		std::cerr << "No space to insert.\n\a";
 		exit(1);
 	}
 	if (pos < 0 || pos > mySize)
 	{
-		cerr << "Invalid Insertion. Operation Terminated with no change.\n\a";
+		std::cerr << "Invalid Insertion. Operation Terminated with no change.\n\a";
 		return;
 	}
 	else // after validating size and index...
@@ -173,7 +174,7 @@ template<class ElementType>
 void StaticList<ElementType>::erase(int pos)
 {
 	if (pos < 0 || pos >= mySize || mySize == 0)
-		cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
+		std::cerr << "Invalid Deletion. Operation Terminated with no change.\n\a";
 	else
 	{
 		// shift elements to the left & overwrite the element to be erased
@@ -188,10 +189,10 @@ void StaticList<ElementType>::erase(int pos)
 template<class ElementType>
 void StaticList<ElementType>::display(ostream& out) const
 {
-	cout << "\nDisplaying List...\n";
+	std::cout << "\nDisplaying List...\n";
 	for (int i = 0; i < mySize; i++)
 	{
-		cout << myArray[i] << ", ";
+		std::cout << myArray[i] << ", ";
 	}
 }
 

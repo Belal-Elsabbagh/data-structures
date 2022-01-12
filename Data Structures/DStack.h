@@ -108,7 +108,7 @@ DStack::DStack(int numElements) : myCapacity(numElements), myTop(-1)
 	assert(myArray != 0);
 }
 
-DStack::DStack(const DStack& original)
+DStack::DStack(const DStack& original) : myCapacity(original.myCapacity)
 {
 	myArray = new(nothrow) StackElement[original.myCapacity];
 	if (myArray == 0)
