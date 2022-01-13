@@ -66,6 +66,7 @@ void HTableChainning::insert(string studentID, string studentName)
 {
 	int index = hash(studentID);
 	Node* newNode;
+
 	if (table[index])
 	{
 		table[index] = new Node(studentID, studentName, table[index]);

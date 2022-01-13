@@ -288,9 +288,9 @@ inline void ModelBST<DataType>::graph(ostream & out) const
 
 //--- Definition of search2()
 template <typename DataType>
-void ModelBST<DataType>::search2(const DataType & item, bool & found,
-                            ModelBST<DataType>::BinNodePointer & locptr,
-                            ModelBST<DataType>::BinNodePointer & parent) const
+void ModelBST<DataType>::search2(const DataType & item, bool & found, 
+                                 BinNodePointer & locptr, 
+                                 BinNodePointer & parent) const
 {
     locptr = myRoot;
     parent = 0;
