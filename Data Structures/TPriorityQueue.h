@@ -99,7 +99,7 @@ private:
 	// Therefore, you need to remove the LinkedList used and replace it with this Vector that you'll create
 	//Hint: use #include <vector> at the begining of the file
 
-	auto getInsertIndex() const;
+	auto getInsertIndex(QueueElement value) const;
 
 	std::vector<QueueElement> myArray;
 };
@@ -140,7 +140,7 @@ void TPriorityQueue<QueueElement>::enqueue(const QueueElement& value)
 		return;
 	}
 	std::cout << "vector size: " << myArray.size() << endl;
-	myArray.insert(getInsertIndex(), value);
+	myArray.insert(getInsertIndex(value), value);
 }
 
 template<class QueueElement>
@@ -165,9 +165,9 @@ void TPriorityQueue<QueueElement>::dequeue()
 }
 
 template<class QueueElement>
-auto TPriorityQueue<QueueElement>::getInsertIndex() const
+auto TPriorityQueue<QueueElement>::getInsertIndex(QueueElement value) const
 {
-	std::vector<QueueElement>::iterator iter = myArray.end();
+	auto iter = myArray.end();
 	for (int i = myArray.size(); i > 0; i--)
 	{
 		int x = i - 1;
