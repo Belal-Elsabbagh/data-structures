@@ -238,55 +238,57 @@ void ModelHashTable::insertQuadratic(string studentID, string studentName)
         table[index] = n;
         numberOfElements++;
     }
-    else 
-    { // Collision
-        while (true) 
+    // Collision
+    while (true)
+    {
+        loc = GetQuadLoc(index, i);
+        if (table[loc].ID == studentID)
         {
-            loc = GetQuadLoc(index, i);
-            if (table[loc].ID == studentID) 
-            {
-                cout << "Student with ID: " << studentID << " and name: " << studentName << " already exists." << endl;
-                return;
-            }
-            if (table[loc].key == -1 || table[loc].key == -2) { // No collision
-                table[loc] = n;
-                n.key = loc;
-                numberOfElements++;
-                return;
-            }
-            if (abs(i) > TableSize / 2) {
-                cout << "Hash Table is full, Can't insert" << endl;
-                return;
-            }
+            cout << "Student with ID: " << studentID << " and name: " << studentName << " already exists." << endl;
+            return;
+        }
+        if (table[loc].key == -1 || table[loc].key == -2) { // No collision
+            table[loc] = n;
+            n.key = loc;
+            numberOfElements++;
+            return;
+        }
+        if (abs(i) > TableSize / 2) {
+            cout << "Hash Table is full, Can't insert" << endl;
+            return;
         }
     }
 }
 
 //----------------- remove Quadratic probing ------------------------------------
-void ModelHashTable::removeQuadratic(string studentID) {
+void ModelHashTable::removeQuadratic(string studentID) 
+{
     int index = hash(studentID);
     int loc, i = 1;
-    if (table[index].ID == studentID) {
+    if (table[index].ID == studentID) 
+    {
         table[index].key = -2;
         table[index].ID = "";
         table[index].value = "";
         numberOfElements--;
         return;
     }
-    else {
-        while (true) {
-            loc = GetQuadLoc(index, i);
-            if (table[loc].key == -1) {
-                cout << "Student with ID: " << studentID << " NOT exists." << endl;
-                return;
-            }
-            if (table[loc].ID == studentID) {
-                table[loc].key = -2;
-                table[loc].ID = "";
-                table[loc].value = "";
-                numberOfElements--;
-                return;
-            }
+
+    while (true)
+    {
+        loc = GetQuadLoc(index, i);
+        if (table[loc].key == -1)
+        {
+            cout << "Student with ID: " << studentID << " NOT exists." << endl;
+            return;
+        }
+        if (table[loc].ID == studentID)
+        {
+            table[loc].key = -2;
+            table[loc].ID = "";
+            table[loc].value = "";
+            numberOfElements--;
+            return;
         }
     }
 }
@@ -302,23 +304,25 @@ int ModelHashTable::searchQuadratic(string studentID) {
 
         return index;
     }
-    else {
-        while (true) {
-            loc = GetQuadLoc(index, i);
-            if (table[loc].key == -1) {
-                cout << "Student with ID: " << studentID << " NOT exists." << endl;
-                return -1;
-            }
-            if (table[loc].ID == studentID) {
-                cout << "Student with ID: " << studentID << " exists." << endl;
-                cout << setw(2) << loc << ": " << setw(2) << table[loc].key
-                    << ": " << setw(3) << table[loc].ID << ": " << setw(10) << table[loc].value << endl;
-                return loc;
-            }
-            if (abs(i) > TableSize / 2) {
-                cout << "Item doesn't exists" << endl;
-                return -1;
-            }
+    while (true)
+    {
+        loc = GetQuadLoc(index, i);
+        if (table[loc].key == -1) 
+        {
+            cout << "Student with ID: " << studentID << " NOT exists." << endl;
+            return -1;
+        }
+        if (table[loc].ID == studentID) 
+        {
+            cout << "Student with ID: " << studentID << " exists." << endl;
+            cout << setw(2) << loc << ": " << setw(2) << table[loc].key
+                << ": " << setw(3) << table[loc].ID << ": " << setw(10) << table[loc].value << endl;
+            return loc;
+        }
+        if (abs(i) > TableSize / 2)
+        {
+            cout << "Item doesn't exists" << endl;
+            return -1;
         }
     }
     return -1;
@@ -348,24 +352,24 @@ void ModelHashTable::insertDouble(string studentID, string studentName)
     if (table[index].key == -1 || table[index].key == -2) { // No collision
         table[index] = n;
         numberOfElements++;
-    }
-    else { // Collision
-        for (int i = 1; i < TableSize; i++) {
-            loc = GetDubLoc(studentID, DoubleHashVal, i);
-            if (table[loc].ID == studentID) {
-                cout << "Student with ID: " << studentID << " and name: " << studentName << " already exists." << endl;
-                return;
-            }
-            if (table[loc].key == -1 || table[loc].key == -2) { // No collision
-                table[loc] = n;
-                n.key = loc;
-                numberOfElements++;
-                return;
-            }
-        }
-        cout << "Hash Table is full, Can't insert" << endl;
         return;
     }
+    // in case of collision
+    for (int i = 1; i < TableSize; i++) {
+        loc = GetDubLoc(studentID, DoubleHashVal, i);
+        if (table[loc].ID == studentID) {
+            cout << "Student with ID: " << studentID << " and name: " << studentName << " already exists." << endl;
+            return;
+        }
+        if (table[loc].key == -1 || table[loc].key == -2) { // No collision
+            table[loc] = n;
+            n.key = loc;
+            numberOfElements++;
+            return;
+        }
+    }
+    cout << "Hash Table is full, Can't insert" << endl;
+    return;
 }
 //----------------- remove Double probing ------------------------------------
 void ModelHashTable::removeDouble(string studentID) {
@@ -378,20 +382,22 @@ void ModelHashTable::removeDouble(string studentID) {
         numberOfElements--;
         return;
     }
-    else {
-        for (int i = 1; i < TableSize; i++) {
-            loc = GetDubLoc(studentID, DoubleHashVal, i);
-            if (table[loc].key == -1) {
-                cout << "Student with ID: " << studentID << " NOT exists." << endl;
-                return;
-            }
-            if (table[loc].ID == studentID) {
-                table[loc].key = -2;
-                table[loc].ID = "";
-                table[loc].value = "";
-                numberOfElements--;
-                return;
-            }
+
+    for (int i = 1; i < TableSize; i++)
+    {
+        loc = GetDubLoc(studentID, DoubleHashVal, i);
+        if (table[loc].key == -1)
+        {
+            cout << "Student with ID: " << studentID << " NOT exists." << endl;
+            return;
+        }
+        if (table[loc].ID == studentID)
+        {
+            table[loc].key = -2;
+            table[loc].ID = "";
+            table[loc].value = "";
+            numberOfElements--;
+            return;
         }
     }
 }
@@ -406,27 +412,26 @@ int ModelHashTable::searchDouble(string studentID) {
             << ": " << setw(3) << table[index].ID << ": " << setw(10) << table[index].value << endl;
         return index;
     }
-    else {
-        for (int i = 1; i < TableSize; i++) {
-            loc = GetDubLoc(studentID, DoubleHashVal, i);
-            if (table[loc].key == -1) {
-                cout << "Student with ID: " << studentID << " NOT exists." << endl;
-                return -1;
-            }
-            if (table[loc].ID == studentID) {
-                cout << "Student with ID: " << studentID << " exists." << endl;
-                cout << setw(2) << loc << ": " << setw(2) << table[loc].key
-                    << ": " << setw(3) << table[loc].ID << ": " << setw(10) << table[loc].value << endl;
-                return loc;
-            }
-            if (abs(i) > TableSize / 2) {
-                cout << "Item doesn't exists" << endl;
-                return -1;
-            }
+
+    for (int i = 1; i < TableSize; i++) {
+        loc = GetDubLoc(studentID, DoubleHashVal, i);
+        if (table[loc].key == -1) {
+            cout << "Student with ID: " << studentID << " NOT exists." << endl;
+            return -1;
         }
-        cout << "Item doesn't exists" << endl;
-        return -1;
+        if (table[loc].ID == studentID) {
+            cout << "Student with ID: " << studentID << " exists." << endl;
+            cout << setw(2) << loc << ": " << setw(2) << table[loc].key
+                << ": " << setw(3) << table[loc].ID << ": " << setw(10) << table[loc].value << endl;
+            return loc;
+        }
+        if (abs(i) > TableSize / 2) {
+            cout << "Item doesn't exists" << endl;
+            return -1;
+        }
     }
+    cout << "Item doesn't exists" << endl;
+    return -1;
 }
 
 //------------------- Display Hash Table ------------------------------------

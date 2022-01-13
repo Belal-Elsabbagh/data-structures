@@ -226,9 +226,9 @@ inline void ModelBST<DataType>::insert(const DataType & item)
             parent->left = locptr;
         else                           // insert to right of parent
             parent->right = locptr;
+        return;
     }
-    else
-        cout << "Item already in the tree\n";
+    cout << "Item already in the tree\n";
 }
 
 //--------- Definition of remove() -----------------------------------------------
@@ -301,14 +301,15 @@ void ModelBST<DataType>::search2(const DataType & item, bool & found,
         {
             parent = locptr;
             locptr = locptr->left;
+            return;
         }
-        else if (locptr->data < item)  // descend right
+        if (locptr->data < item)  // descend right
         {
             parent = locptr;
             locptr = locptr->right;
+            return;
         }
-        else                           // item found
-            found = true;
+        found = true; // item found
     }
 }
 
