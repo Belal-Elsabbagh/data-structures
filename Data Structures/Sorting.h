@@ -46,8 +46,18 @@ public:
      -----------------------------------------------------------------------*/
     
     void MergeSort(int* arrayA, int* arrayB, int low, int high);
-    void radixSort(std::list<int>& x, int numDigits = -1, int base = 10);
+    /*-----------------------------------------------------------------------
+     MergeSort
 
+     
+     -----------------------------------------------------------------------*/
+
+    void RadixSort(std::list<int>& x, int numDigits = -1, int base = 10);
+    /*-----------------------------------------------------------------------
+     RadixSort
+
+
+     -----------------------------------------------------------------------*/
 private:
     void swap(int* xp, int* yp)
     {
@@ -159,12 +169,12 @@ void Sorting::quickSort(int* arr, int left, int right)
 
 void Sorting::MergeSort(int* arrayA, int* arrayB, int low, int high)
 {
-    int mid;
+    //int mid;
     if (high < low)
         return;
 }
 
-void Sorting::radixSort(std::list<int>& x, int numDigits, int base)
+void Sorting::RadixSort(std::list<int>& x, int numDigits, int base)
 {
     std::list<int>* bucket = new std::list<int>[base];
     int basePower = 1;
@@ -175,29 +185,26 @@ void Sorting::radixSort(std::list<int>& x, int numDigits, int base)
         while (!x.empty())
         {
             value = x.front();
-            for (int digit = 0; digit < base; i++)
-            {
-                if (value % (10 ^ i) == digit)
-                {
-                    bucket[digit].push_back(value);
-                }
-                x.pop_front();
-            }
+            x.pop_front();
+            int digit = value % (base * basePower) / basePower;
+            bucket[digit].push_back(value);
         }
 
         for (int i = 0; i < base; i++)
         {
             while (!bucket[i].empty())
             {
-                x.push_back(bucket[i].front());
+                value = bucket[i].front();
+                x.push_back(value);
                 bucket[i].pop_front();
             }
         }
+        basePower *= base;
     }
 }
 
 void Sorting::merge(int* arrayA, int* arrayB, int low, int mid, int high)
 {
-    int h, i, j, k;
+    //int h, i, j, k;
 
 }

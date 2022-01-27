@@ -11,16 +11,19 @@
 #include "LLQueue.h"
 #include "LLPriorityQueue.h"
 #include "ModelBinarySearchTree.h"
+#include "Sorting.h"
+#include <list>
 
 void LLStackTest();
 void TPriorityQueueTest();
 void LLPriorityQueueTest();
 void LinkedListTest();
 void ModelBSTTest();
+void SortingTest();
 
 int main()
 {
-    ModelBSTTest();
+    SortingTest();
 }
 
 void LLStackTest()
@@ -117,5 +120,14 @@ void ModelBSTTest()
     tree.remove(42);
 
     tree.graph(std::cout);
+}
+
+void SortingTest()
+{
+    std::list<int> list {527,373,789,3,67,372,672,683};
+    Sorting s;
+    s.RadixSort(list, 3);
+    for (int i : list)
+        cout << i << " ";
 }
 

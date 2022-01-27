@@ -168,7 +168,7 @@ template<class QueueElement>
 auto TPriorityQueue<QueueElement>::getInsertIndex(QueueElement value) const
 {
 	auto iter = myArray.end();
-	for (int i = myArray.size(); i > 0; i--)
+	for (size_t i = myArray.size(); i > 0; i--)
 	{
 		int x = i - 1;
 

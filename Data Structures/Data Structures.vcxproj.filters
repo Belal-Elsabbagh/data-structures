@@ -30,7 +30,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Data Structures.cpp">
+    <ClCompile Include="DSA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
