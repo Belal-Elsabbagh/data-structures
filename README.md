@@ -21,3 +21,9 @@ A repository containing the data structures we use in our DSA course
   * HashTable
   * HashTableChaining
 * ### Sorting Algorithms
+  * Bubble Sort
+  * Selection Sort
+  * Insertion Sort
+  * Quick Sort
+  * Merge Sort
+  * Radix Sort
