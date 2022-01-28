@@ -6,7 +6,7 @@ A repository containing the data structures we use in our DSA course
 * ### List
   * StaticList (Static array)
   * DynamicList (Dynamic array)
-* ### Linked List
+  * Linked List
 * ### Stack
   * DStack (Dynamic array)
   * LLStack (linked list)
@@ -21,3 +21,9 @@ A repository containing the data structures we use in our DSA course
   * HashTable
   * HashTableChaining
 * ### Sorting Algorithms
+  * Bubble Sort
+  * Selection Sort
+  * Insertion Sort
+  * Quick Sort
+  * Merge Sort
+  * Radix Sort
