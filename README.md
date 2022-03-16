@@ -1,5 +1,5 @@
 # Data Structures
-A repository containing the data structures we use in our DSA course
+A repository containing the data structures I implemented in our DSA course
 
 ## Structures:
 
